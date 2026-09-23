@@ -1251,6 +1251,10 @@ details a {
   color: var(--ink);
   box-shadow: none;
   transform: none;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 500;
+  gap: 8px;
 }
 
 .lead-form .button.primary:hover {
@@ -1260,12 +1264,13 @@ details a {
 }
 
 .lead-form .button.primary img {
-  padding: 3px;
-  width: 25px;
-  height: 25px;
-  flex-basis: 25px;
-  border-radius: 50%;
-  background: #128c4a;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+  border-radius: 0;
+  background: transparent;
+  filter: brightness(0) opacity(0.75);
 }
 
 label {
@@ -1318,7 +1323,7 @@ summary:focus-visible {
 
 .site-footer .footer-heading .eyebrow,
 .site-footer .branch-state {
-  color: #efa7a9;
+  color: var(--steel);
 }
 
 .site-footer .footer-locator,

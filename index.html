@@ -9,12 +9,7 @@
       content="Encontre na Sueca soluções SKF em rolamentos, mancais, vedações, lubrificação, graxas e ferramentas MAPRO para aplicações industriais e agrícolas."
     />
     <meta name="theme-color" content="#B5181A" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.skf.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -24,112 +19,80 @@
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="site-header" aria-label="Navegação principal">
-      <div class="header-brands">
-        <a class="brand" href="#" aria-label="Sueca SKF">
-          <img class="brand-logo" src="assets/sueca-logo-1.png" alt="Sueca" width="180" height="54" />
-          <small>Distribuidor autorizado SKF</small>
+      <div class="header-brands" aria-label="Sueca, distribuidor autorizado SKF">
+        <a class="brand" href="#sueca" aria-label="Conhecer a Sueca nesta página">
+          <img class="brand-logo" src="assets/sueca-logo-2.png" alt="Sueca" width="180" height="54" />
         </a>
         <span class="brand-divider" aria-hidden="true"></span>
         <a class="skf-header" href="https://www.skf.com/br" target="_blank" rel="noreferrer" aria-label="SKF Brasil">
-          <span class="skf-logo-crop" role="img" aria-label="SKF">
-            <img src="assets/skf-logo-sueca.jpg" alt="" width="586" height="135" />
-          </span>
+          <img src="assets/skf-logo-white.svg" alt="SKF" width="86" height="20" />
         </a>
       </div>
-      <nav class="nav-links" aria-label="Seções da página">
+      <nav class="nav-links" id="primary-nav" aria-label="Seções da página">
         <a href="#portfolio">Portfólio</a>
         <a href="#aplicacoes">Aplicações</a>
-        <a href="#certificacoes">Certificações</a>
+        <a href="#sueca">Sobre nós</a>
         <a href="#filiais">Filiais</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="header-cta" href="#contato">Falar com especialista</a>
+      <a class="header-cta" href="#contato">Solicitar orientação</a>
+      <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu"><span aria-hidden="true">☰</span></button>
     </header>
 
     <main id="conteudo">
       <section class="hero section-grid">
-        <span class="float-shape float-shape-diamond" aria-hidden="true"></span>
-        <span class="float-shape float-shape-bracket" aria-hidden="true"></span>
         <div class="hero-copy reveal">
-          <p class="eyebrow">SKF na Sueca</p>
-          <h1>Soluções SKF para cada giro da sua operação.</h1>
-          <p class="hero-text">
-            Rolamentos, mancais e soluções SKF para indústria e agro, com produtos originais
-            e orientação técnica da Sueca.
-          </p>
+          <p class="eyebrow hero-era">SKF na Sueca · Desde 1998</p>
+          <h1>Mantemos seu mundo girando.</h1>
+          <p class="hero-text">Há mais de um século, a SKF reduz o atrito e mantém o mundo em movimento. Na Sueca, essa tecnologia chega à sua operação com orientação técnica.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#contato">Solicitar orientação</a>
-            <a class="button secondary" href="#portfolio">Conhecer portfólio</a>
-          </div>
-          <div class="trust-strip" aria-label="Credenciais Sueca SKF">
-            <span class="trust-item"><span class="trust-icon trust-icon-shield" aria-hidden="true"></span>Distribuidor autorizado SKF</span>
-            <span class="trust-item"><span class="trust-icon trust-icon-badge" aria-hidden="true"></span>Certificação CMP</span>
-            <span class="trust-item"><span class="trust-icon trust-icon-tractor" aria-hidden="true"></span>Distribuidor agrícola SKF</span>
+            <a class="hero-link" href="#portfolio">Ver produtos SKF</a>
+            <a class="hero-link" href="#sueca">Sobre nós</a>
           </div>
         </div>
 
         <div class="hero-visual reveal" aria-label="Rolamento em destaque">
-          <div class="hero-skf-signature" aria-hidden="true">
-            <span class="skf-logo-crop"><img src="assets/skf-logo-sueca.jpg" alt="" width="586" height="135" /></span>
+          <div class="hero-product-media">
+            <img class="bearing-photo" src="assets/skf-home-bearing.jpg" alt="Rolamento de esferas SKF visto de frente, com gravações no anel" width="2500" height="2500" fetchpriority="high" />
           </div>
-          <div class="bearing-showcase">
-            <img
-              class="bearing-photo"
-              src="assets/skf-bearing-front.png"
-              alt="Rolamento de esferas real visto de frente"
-              width="512"
-              height="512"
-              fetchpriority="high"
-            />
-          </div>
-          <div class="technical-card">
-            <small>Rolamentos SKF</small>
-            <strong>Precisão para cada giro.</strong>
-            <p>Seleção técnica para sua aplicação industrial ou agrícola.</p>
+          <div class="hero-product-note">
+            <span>Rolamento SKF</span>
+            <strong>Precisão em cada giro.</strong>
+            <p>Menos atrito para uma operação mais confiável.</p>
           </div>
         </div>
       </section>
 
-      <section class="product-cinema" aria-labelledby="produtos-skf">
-        <span class="float-shape float-shape-frame" aria-hidden="true"></span>
-        <div class="section-heading reveal">
-          <p class="eyebrow">Produtos SKF em foco</p>
-          <h2 id="produtos-skf">Soluções para cada ponto crítico da operação.</h2>
-          <p>
-            Rolamentos, mancais e lubrificação para operações que dependem de precisão,
-            resistência e disponibilidade.
-          </p>
+      <section class="institutional" id="sueca" aria-labelledby="institutional-title">
+        <div class="institutional-inner reveal" data-motion="left">
+          <p class="eyebrow">A Sueca</p>
+          <h2 id="institutional-title">Perto da sua operação. À altura da SKF.</h2>
+          <p>Portfólio, orientação técnica e presença para manter a indústria em movimento.</p>
+          <a class="button institutional-cta" href="https://www.sueca.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site oficial da Sueca (abre em nova aba)">Visitar sueca.com.br <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="cinema-stage">
-          <article class="cinema-product reveal">
-            <span class="product-kicker">Rolamentos SKF</span>
-            <img
-              src="assets/skf-bearing-group-1200.jpg"
-              alt="Conjunto de rolamentos da linha SKF apresentado pela Sueca"
-              loading="lazy"
-            />
-            <h3>Baixo atrito, alta rotação e confiabilidade.</h3>
-            <p>Para motores, redutores, linhas industriais, implementos e conjuntos rotativos.</p>
+        <small class="institutional-note">Imagem ilustrativa</small>
+      </section>
+
+      <section class="certifications" id="certificacoes">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Certificações</p>
+          <h2>Reconhecimento que comprova nossa especialização.</h2>
+        </div>
+        <div class="cert-grid">
+          <article class="cert-card reveal">
+            <strong>SKF</strong>
+            <h3>Distribuidor autorizado</h3>
+            <p>Acesso a produtos originais SKF e suporte de uma rede qualificada.</p>
           </article>
-          <article class="cinema-product reveal">
-            <span class="product-kicker">Mancais SKF</span>
-            <img
-              src="assets/skf-housing-1000.jpg"
-              alt="Caixa de mancal SKF"
-              loading="lazy"
-            />
-            <h3>Montagem rápida e proteção do conjunto.</h3>
-            <p>Unidades prontas para uso, com alojamentos robustos e relubrificação planejada.</p>
+          <article class="cert-card reveal">
+            <img class="cmp-logo" src="assets/skf-logo-sueca.jpg" alt="Selo SKF Certified Maintenance Partner" loading="lazy" />
+            <h3>Certificação CMP</h3>
+            <p>Capacitação técnica para atuar com soluções e boas práticas SKF.</p>
           </article>
-          <article class="cinema-product reveal">
-            <span class="product-kicker">Lubrificação SKF</span>
-            <img
-              src="assets/skf-system24.png"
-              alt="Lubrificadores automáticos SKF SYSTEM 24"
-              loading="lazy"
-            />
-            <h3>Aplicação correta para vida útil maior.</h3>
-            <p>Graxas, pistolas e ferramentas MAPRO para controlar excesso, falta e contaminação.</p>
+          <article class="cert-card reveal">
+            <strong>AGRO</strong>
+            <h3>Distribuidor agrícola SKF</h3>
+            <p>Especialização em aplicações agrícolas e ambientes de alta contaminação.</p>
           </article>
         </div>
       </section>
@@ -138,11 +101,8 @@
         <span class="float-shape float-shape-cross" aria-hidden="true"></span>
         <div class="section-copy reveal">
           <p class="eyebrow">A força da SKF</p>
-          <h2>Uma das maiores referências mundiais em rolamentos.</h2>
-          <p>
-            A tecnologia SKF chega à sua operação através da experiência e estrutura da Sueca:
-            produtos originais, suporte técnico e leitura correta das condições de aplicação.
-          </p>
+          <h2>Por dentro da precisão SKF.</h2>
+          <p>Engenharia em cada componente. Escolha técnica para cada aplicação.</p>
         </div>
         <figure class="cutaway reveal" aria-label="Componentes de um rolamento SKF">
           <img class="cutaway-image" src="assets/skf-bearing.png" alt="Rolamento SKF em corte mostrando anéis e esferas" loading="lazy" />
@@ -167,148 +127,120 @@
         </figure>
       </section>
 
-      <section class="why">
-        <div class="section-heading reveal">
-          <p class="eyebrow">SKF + Sueca</p>
-          <h2>Tecnologia SKF. Experiência Sueca.</h2>
-          <a class="button primary" href="https://www.sueca.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site oficial da Sueca (abre em nova aba)">Visitar site da Sueca</a>
-        </div>
-        <div class="why-grid">
-          <article class="feature-card reveal">
-            <h3>Distribuição autorizada</h3>
-            <p>Produtos originais e acesso ao portfólio SKF com atendimento especializado.</p>
-          </article>
-          <article class="feature-card reveal">
-            <h3>Certificação CMP</h3>
-            <p>Estrutura e capacitação reconhecidas para atuar com soluções SKF.</p>
-          </article>
-          <article class="feature-card reveal">
-            <h3>Especialização agrícola</h3>
-            <p>Conhecimento das necessidades do campo: poeira, vibração e operação severa.</p>
-          </article>
-          <article class="feature-card reveal">
-            <h3>Suporte técnico</h3>
-            <p>Apoio para identificar a solução adequada para carga, rotação e ambiente.</p>
-          </article>
-        </div>
-      </section>
-
       <section class="portfolio" id="portfolio">
         <div class="section-heading reveal">
           <p class="eyebrow">Portfólio SKF</p>
-          <h2>Muito além do rolamento.</h2>
-          <p>
-            Da precisão industrial à resistência exigida pelo campo, a Sueca oferece soluções SKF
-            para diferentes etapas da operação.
-          </p>
+          <h2>O componente certo para cada desafio.</h2>
         </div>
         <div class="portfolio-grid">
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="rolamentos">
             <img src="assets/skf-bearing-group-1200.jpg" alt="Linha de rolamentos SKF" loading="lazy" />
             <h3>Rolamentos</h3>
-            <p>Soluções para diferentes cargas, velocidades e condições de operação.</p>
+            <p>Para diferentes cargas e velocidades.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de rolamentos">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="mancais">
             <img src="assets/skf-housing-1000.jpg" alt="Caixa de mancal SKF" loading="lazy" />
             <h3>Mancais</h3>
-            <p>Montagem, suporte e proteção para conjuntos rotativos.</p>
+            <p>Suporte para conjuntos rotativos.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de mancais">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="vedacoes">
             <img src="assets/skf-seals.jpg" alt="Conjunto de vedações industriais SKF" loading="lazy" />
             <h3>Vedações</h3>
-            <p>Proteção contra contaminantes e perda de lubrificante.</p>
+            <p>Proteção contra contaminação.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de vedações">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="lubrificacao">
             <img src="assets/skf-system24.png" alt="Lubrificadores automáticos SKF SYSTEM 24" loading="lazy" />
             <h3>Lubrificação</h3>
-            <p>Aplicação adequada e automatizada para maior confiabilidade.</p>
+            <p>Lubrificação no ponto certo.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de lubrificação">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="graxas">
             <img src="assets/skf-lubricants.png" alt="Graxas SKF em embalagens industriais" loading="lazy" />
             <h3>Graxas</h3>
-            <p>Lubrificantes para diferentes temperaturas, cargas e ambientes.</p>
+            <p>Para cargas e ambientes severos.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de graxas">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
-          <article class="product-card reveal">
+          <article class="product-card reveal" data-product="mapro">
             <img src="assets/skf-mapro.webp" alt="Kit de ferramentas SKF MAPRO para montagem de rolamentos" loading="lazy" />
             <h3>Ferramentas MAPRO</h3>
-            <p>Montagem, desmontagem, manutenção e monitoramento com mais segurança.</p>
+            <p>Manutenção com mais precisão.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de ferramentas MAPRO">Ver detalhes <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="product-card reveal" data-product="solid-oil">
+            <img src="assets/skf-solid-oil-sueca.png" alt="Rolamentos SKF com Solid Oil para ambientes úmidos e contaminados" loading="lazy" decoding="async" />
+            <h3>Rolamentos Solid Oil</h3>
+            <p>Proteção em ambientes úmidos.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de rolamentos Solid Oil">Ver detalhes <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="product-card reveal" data-product="correntes">
+            <img src="assets/skf-chains-sueca.jpg" alt="Correntes industriais SKF apresentadas pela Sueca" loading="lazy" decoding="async" />
+            <h3>Correntes SKF</h3>
+            <p>Transmissão de potência confiável.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de correntes SKF">Ver detalhes <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="product-card reveal" data-product="sensorizadas">
+            <img src="assets/skf-sensor-bearing-sueca.png" alt="Unidade de rolamento SKF com sensor integrado e cabo" loading="lazy" decoding="async" />
+            <h3>Unidades sensorizadas</h3>
+            <p>Monitoramento integrado ao conjunto.</p>
+            <button class="product-open" type="button" aria-haspopup="dialog" aria-label="Ver detalhes de unidades sensorizadas">Ver detalhes <span aria-hidden="true">↗</span></button>
           </article>
         </div>
+        <div class="portfolio-inquiry reveal" data-motion="left">
+          <p>Uma aplicação específica pede uma escolha certa.</p>
+          <a class="button secondary" href="#contato">Solicitar orientação <span aria-hidden="true">↓</span></a>
+        </div>
       </section>
+
+      <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
+        <button class="product-dialog-close" type="button" aria-label="Fechar detalhes">×</button>
+        <div class="product-dialog-media"><img id="product-dialog-image" src="assets/skf-bearing-group-1200.jpg" alt="" /></div>
+        <div class="product-dialog-copy">
+          <p class="eyebrow">Portfólio SKF</p>
+          <h2 id="product-dialog-title">Rolamentos</h2>
+          <p id="product-dialog-description"></p>
+          <strong>Onde aplicar</strong>
+          <p id="product-dialog-applications"></p>
+          <a class="button primary" href="#contato" id="product-dialog-cta">Solicitar orientação <span aria-hidden="true">↓</span></a>
+        </div>
+      </dialog>
 
       <section class="applications" id="aplicacoes">
         <div class="section-heading reveal">
-          <p class="eyebrow">Industrial x Agrícola</p>
-          <h2>Cada aplicação exige uma solução diferente.</h2>
+          <p class="eyebrow">Onde a SKF atua</p>
+          <h2>Do chão de fábrica ao campo.</h2>
         </div>
         <div class="application-compare">
-          <article class="application-panel industrial reveal">
-            <small>Industrial</small>
-            <h3>Alta precisão. Alta performance.</h3>
-            <p>Para aplicações que exigem estabilidade, desempenho em rotação e eficiência operacional.</p>
-            <ul>
-              <li>Alta precisão</li>
-              <li>Altas rotações</li>
-              <li>Controle de temperatura</li>
-              <li>Ambientes controlados</li>
-            </ul>
+          <article class="application-panel industrial reveal" data-motion="left">
+            <img src="assets/application-industrial.jpg" alt="Cena ilustrativa de eixo e mancais em linha industrial" loading="lazy" decoding="async" />
+            <div class="application-content">
+              <small>Indústria</small>
+              <h3>Precisão que sustenta a produção.</h3>
+              <p>Para linhas que não podem parar.</p>
+            </div>
           </article>
-          <div class="compare-core reveal" aria-hidden="true">
-            <span>Precisão</span>
-            <i></i>
-            <span>Resistência</span>
-          </div>
-          <article class="application-panel agri reveal">
-            <small>Agrícola</small>
-            <h3>Resistência para condições extremas.</h3>
-            <p>Para campo, contaminação, vibração, umidade e variações severas de operação.</p>
-            <ul>
-              <li>Poeira e terra</li>
-              <li>Umidade</li>
-              <li>Vibração</li>
-              <li>Operações severas</li>
-            </ul>
+          <article class="application-panel agri reveal" data-motion="right">
+            <img src="assets/application-agro.jpg" alt="Cena ilustrativa de manutenção em colheitadeira no campo" loading="lazy" decoding="async" />
+            <div class="application-content">
+              <small>Agro</small>
+              <h3>Resistência para ir mais longe.</h3>
+              <p>Para trabalho intenso, poeira e vibração.</p>
+            </div>
           </article>
         </div>
+        <p class="image-disclaimer">Cenas de aplicação ilustrativas.</p>
       </section>
 
       <section class="solution-band">
-        <div class="reveal">
-          <p class="eyebrow">Ciclo de vida do rolamento SKF</p>
-          <h2>A confiabilidade começa antes da primeira rotação.</h2>
-          <p>
-            Montagem, lubrificação, alinhamento, monitoramento e desmontagem influenciam a vida útil
-            do rolamento. Produtos e ferramentas SKF ajudam em cada etapa.
-          </p>
-          <ul class="lifecycle-steps" aria-label="Etapas do ciclo de vida do rolamento">
-            <li>Montagem</li><li>Lubrificação</li><li>Alinhamento</li><li>Monitoramento</li><li>Desmontagem</li>
-          </ul>
-          <a class="lifecycle-source" href="https://br.promo.skf.com/acton/media/23869/ferramentas-mapro" target="_blank" rel="noreferrer">Conheça o ciclo de vida na SKF</a>
-        </div>
-        <a class="button primary" href="#contato">Fale com um especialista</a>
-      </section>
-
-      <section class="certifications" id="certificacoes">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Certificações</p>
-          <h2>Reconhecimento que comprova nossa especialização.</h2>
-        </div>
-        <div class="cert-grid">
-          <article class="cert-card reveal">
-            <strong>SKF</strong>
-            <h3>Distribuidor autorizado</h3>
-            <p>Acesso a produtos originais SKF e suporte de uma rede qualificada.</p>
-          </article>
-          <article class="cert-card reveal">
-            <img class="cmp-logo" src="assets/skf-logo-sueca.jpg" alt="Selo SKF Certified Maintenance Partner" loading="lazy" />
-            <h3>Certificação CMP</h3>
-            <p>Capacitação técnica para atuar com soluções e boas práticas SKF.</p>
-          </article>
-          <article class="cert-card reveal">
-            <strong>AGRO</strong>
-            <h3>Distribuidor agrícola SKF</h3>
-            <p>Especialização em aplicações agrícolas e ambientes de alta contaminação.</p>
-          </article>
+        <div class="solution-band-inner">
+          <div class="reveal" data-motion="left">
+            <p class="eyebrow">Ciclo de vida SKF</p>
+            <h2>Confiabilidade em cada etapa.</h2>
+            <p>Montagem, lubrificação e monitoramento: tudo importa.</p>
+          </div>
+          <a class="button secondary" href="#contato">Aplicar na minha operação <span aria-hidden="true">↓</span></a>
         </div>
       </section>
 
@@ -388,7 +320,7 @@
             O que você precisa?
             <textarea name="mensagem" rows="4"></textarea>
           </label>
-          <button class="button primary" type="submit">Enviar pelo WhatsApp</button>
+          <button class="button primary" type="submit"><img src="assets/whatsapp.svg" alt="" aria-hidden="true" />Enviar pelo WhatsApp</button>
         </form>
       </section>
     </main>
@@ -437,14 +369,19 @@
 
         <div class="footer-bottom">
           <div class="footer-identity">
-            <img src="assets/sueca-logo-2.png" alt="Sueca" width="120" height="43" loading="lazy" />
+            <img src="assets/sueca-logo-1.png" alt="Sueca" width="120" height="43" loading="lazy" />
             <span>Distribuidor autorizado SKF</span>
           </div>
           <div class="footer-hours"><strong>Atendimento</strong><span>Seg a sex · 8h às 12h / 13h30 às 18h</span></div>
-          <a class="footer-whatsapp" href="https://wa.me/5551981221367" target="_blank" rel="noreferrer">WhatsApp (51) 98122-1367</a>
+          <a class="footer-whatsapp" href="https://wa.me/5551981221367" target="_blank" rel="noopener noreferrer"><img src="assets/whatsapp.svg" alt="" aria-hidden="true" />WhatsApp (51) 98122-1367</a>
         </div>
       </div>
     </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/5551981221367?text=Ol%C3%A1%2C%20quero%20orienta%C3%A7%C3%A3o%20sobre%20produtos%20SKF." target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Sueca pelo WhatsApp (abre em nova aba)" title="Conversar com a Sueca no WhatsApp">
+      <img src="assets/whatsapp.svg" alt="" aria-hidden="true" />
+      <span>WhatsApp</span>
+    </a>
 
   </body>
 </html>

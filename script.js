@@ -1,13 +1,56 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const menuToggle = document.querySelector(".menu-toggle");
+const siteHeader = document.querySelector(".site-header");
+const darkSections = document.querySelectorAll(".institutional, .solution-band");
+const syncHeader = () => {
+  const sampleY = siteHeader.offsetHeight / 2;
+  const isDark = Array.from(darkSections).some((section) => {
+    const bounds = section.getBoundingClientRect();
+    return bounds.top <= sampleY && bounds.bottom > sampleY;
+  });
+  siteHeader.classList.toggle("is-dark", isDark);
+  siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
+};
+window.addEventListener("scroll", syncHeader, { passive: true });
+window.addEventListener("resize", syncHeader);
+syncHeader();
+
+function closeMenu() {
+  siteHeader.classList.remove("menu-open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Abrir menu");
+  menuToggle.querySelector("span").textContent = "☰";
+}
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = siteHeader.classList.toggle("menu-open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+  menuToggle.querySelector("span").textContent = isOpen ? "×" : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeMenu();
+});
+document.addEventListener("click", (event) => {
+  if (!siteHeader.contains(event.target)) closeMenu();
+});
+
+document.querySelectorAll(".product-card, .cert-card").forEach((item, index) => {
+  item.dataset.motion = index % 2 === 0 ? "left" : "right";
+});
+
 function fallbackReveal() {
+  if (reduceMotion) {
+    document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
       });
     },
     { threshold: 0.16 }
@@ -26,56 +69,63 @@ function initCinematicMotion() {
   gsap.registerPlugin(ScrollTrigger);
   gsap.defaults({ ease: "power3.out", duration: 0.8 });
 
-  gsap.set(".reveal", { autoAlpha: 0, y: 34 });
-  gsap.set(".bearing-showcase", { scale: 0.88, y: 24 });
-  gsap.set(".technical-card", { autoAlpha: 0, y: 18 });
-
-  const heroTimeline = gsap.timeline();
-  heroTimeline
-    .to(".hero-copy", { autoAlpha: 1, y: 0, duration: 0.9 })
-    .to(".hero-visual", { autoAlpha: 1, y: 0, duration: 0.9 }, "<0.06")
-    .to(".bearing-showcase", { y: 0, scale: 1, duration: 1.1 }, "<0.12")
-    .to(".technical-card", { y: 0, autoAlpha: 1, duration: 0.7 }, "<0.25");
-
-  ScrollTrigger.batch(".reveal:not(.hero-copy):not(.hero-visual)", {
-    start: "top 82%",
-    batchMax: 4,
-    once: true,
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        autoAlpha: 1,
-        y: 0,
-        stagger: { each: 0.06, from: "start" },
-        overwrite: true
-      });
-    }
+  const sideOffset = window.matchMedia("(max-width: 640px)").matches
+    ? 24
+    : window.matchMedia("(max-width: 980px)").matches ? 40 : 64;
+  gsap.set(".reveal", {
+    autoAlpha: 0,
+    x: (_, element) => {
+      if (element.matches(".hero-copy") || element.dataset.motion === "left") return -sideOffset;
+      if (element.matches(".hero-visual") || element.dataset.motion === "right") return sideOffset;
+      return 0;
+    },
+    y: (_, element) => element.dataset.motion || element.matches(".hero-copy, .hero-visual") ? 0 : 34
+  });
+  gsap.set(".hero-product-media", {
+    autoAlpha: 0,
+    x: 80,
+    rotation: -12,
+    scale: 0.95,
+    transformOrigin: "50% 50%"
   });
 
-  gsap.utils.toArray(".cinema-product").forEach((card, index) => {
-    const image = card.querySelector("img");
-    gsap.to(image, {
-      y: index % 2 === 0 ? -34 : -18,
-      scale: 1.06,
-      ease: "none",
+  const heroTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".hero", start: "top bottom", end: "bottom top",
+      toggleActions: "restart reset restart reset"
+    }
+  });
+  heroTimeline
+    .to(".hero-copy", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 })
+    .to(".hero-visual", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 }, "<0.06")
+    .to(".hero-product-media", { autoAlpha: 1, x: 0, rotation: 0, scale: 1, duration: 1.4 }, "<0.12");
+
+  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual):not(.product-card)").forEach((element) => {
+    gsap.to(element, {
+      autoAlpha: 1, x: 0, y: 0,
       scrollTrigger: {
-        trigger: card,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1.1
+        trigger: element, start: "top 94%", end: "bottom top",
+        toggleActions: "restart reset restart reset"
       }
     });
   });
 
-  gsap.to(".application-panel", {
-    y: -18,
-    stagger: 0.12,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".applications",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1
-    }
+  const productTravel = window.matchMedia("(max-width: 640px)").matches ? 84 : 180;
+  gsap.utils.toArray(".product-card").forEach((card, index) => {
+    const direction = card.dataset.motion === "left" ? -1 : 1;
+    gsap.set(card, { autoAlpha: 0, x: direction * productTravel, y: 0, scale: 0.96 });
+    gsap.to(card, {
+      autoAlpha: 1,
+      x: 0,
+      scale: 1,
+      duration: 1.05,
+      delay: (index % 3) * 0.08,
+      overwrite: true,
+      scrollTrigger: {
+        trigger: card, start: "top 94%", end: "bottom top",
+        toggleActions: "restart reset restart reset"
+      }
+    });
   });
 
   const visibleGuides = document.querySelector(
@@ -93,7 +143,12 @@ function initCinematicMotion() {
   gsap.set(guideDots, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" });
 
   gsap.timeline({
-    scrollTrigger: { trigger: ".cutaway", start: "top 72%", once: true }
+    scrollTrigger: {
+      trigger: ".cutaway",
+      start: "top 72%",
+      end: "bottom top",
+      toggleActions: "restart reset restart reset"
+    }
   })
     .to(guidePaths, { strokeDashoffset: 0, duration: 0.65, stagger: 0.1, ease: "power2.out" })
     .to(guideDots, { autoAlpha: 1, scale: 1, duration: 0.2, stagger: 0.1 }, "<0.2");
@@ -124,6 +179,78 @@ function initCinematicMotion() {
 }
 
 initCinematicMotion();
+
+const productDetails = {
+  rolamentos: {
+    title: "Rolamentos",
+    description: "A linha SKF reúne diferentes geometrias para apoiar eixos em movimento. A seleção considera carga, rotação, temperatura, lubrificação e condições do ambiente.",
+    applications: "Motores, redutores, bombas, transportadores e equipamentos agrícolas, conforme o dimensionamento de cada conjunto."
+  },
+  mancais: {
+    title: "Mancais",
+    description: "Os mancais alojam e apoiam o rolamento, ajudando a manter o eixo posicionado e facilitando a instalação e a manutenção do conjunto.",
+    applications: "Eixos de transportadores, ventiladores, linhas de produção e máquinas agrícolas."
+  },
+  vedacoes: {
+    title: "Vedações",
+    description: "Vedações ajudam a reter o lubrificante e a limitar a entrada de água, poeira e outras partículas. Perfil e material devem acompanhar as condições de trabalho.",
+    applications: "Conjuntos rotativos expostos a contaminantes, umidade ou exigências específicas de vedação."
+  },
+  lubrificacao: {
+    title: "Lubrificação SKF SYSTEM 24",
+    description: "Lubrificadores automáticos de ponto único entregam pequenas quantidades de graxa ou óleo de modo regular, reduzindo a dependência da aplicação manual.",
+    applications: "Pontos de lubrificação em motores, bombas, ventiladores, transportadores e mancais."
+  },
+  graxas: {
+    title: "Graxas SKF",
+    description: "A graxa correta depende da velocidade, carga, temperatura e exposição do equipamento. A escolha do produto e do intervalo de relubrificação caminham juntas.",
+    applications: "Rolamentos industriais e agrícolas sujeitos a diferentes condições de operação."
+  },
+  mapro: {
+    title: "Ferramentas MAPRO",
+    description: "Ferramentas de manutenção SKF apoiam montagem, desmontagem, alinhamento e lubrificação com procedimentos mais controlados.",
+    applications: "Oficinas de manutenção e equipes que instalam ou substituem rolamentos e componentes associados."
+  },
+  "solid-oil": {
+    title: "Rolamentos Solid Oil",
+    description: "O Solid Oil incorpora lubrificante em uma matriz polimérica dentro do rolamento. É uma alternativa para aplicações em que água e contaminantes desafiam a lubrificação convencional.",
+    applications: "Ambientes úmidos ou sujeitos à contaminação, após avaliação das condições da aplicação."
+  },
+  correntes: {
+    title: "Correntes SKF",
+    description: "Correntes transmitem movimento e potência entre rodas dentadas. Dimensionamento, lubrificação e ambiente de operação orientam a seleção.",
+    applications: "Sistemas de transmissão e transporte em máquinas industriais e agrícolas."
+  },
+  sensorizadas: {
+    title: "Unidades sensorizadas",
+    description: "Unidades com sensores integram apoio mecânico e coleta de sinais da operação. A configuração depende do equipamento e dos dados que precisam ser acompanhados.",
+    applications: "Conjuntos que exigem informação integrada para controle ou monitoramento."
+  }
+};
+
+const productDialog = document.querySelector("#product-dialog");
+let lastProductTrigger;
+document.querySelectorAll(".product-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    const detail = productDetails[card.dataset.product];
+    if (!detail) return;
+    lastProductTrigger = card.querySelector(".product-open");
+    const cardImage = card.querySelector("img");
+    const dialogImage = productDialog.querySelector("#product-dialog-image");
+    dialogImage.src = cardImage.src;
+    dialogImage.alt = cardImage.alt;
+    productDialog.querySelector("#product-dialog-title").textContent = detail.title;
+    productDialog.querySelector("#product-dialog-description").textContent = detail.description;
+    productDialog.querySelector("#product-dialog-applications").textContent = detail.applications;
+    productDialog.showModal();
+  });
+});
+productDialog.querySelector(".product-dialog-close").addEventListener("click", () => productDialog.close());
+productDialog.querySelector("#product-dialog-cta").addEventListener("click", () => productDialog.close());
+productDialog.addEventListener("click", (event) => {
+  if (event.target === productDialog) productDialog.close();
+});
+productDialog.addEventListener("close", () => lastProductTrigger?.focus());
 
 const branches = {
   poa: {

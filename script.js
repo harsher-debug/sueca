@@ -260,6 +260,8 @@ const branches = {
     address: "Rua Santos Dumont, 1000, bairro São Geraldo\nPorto Alegre - RS, CEP 90230-240",
     phone: "(51) 3337-8477",
     phoneHref: "tel:+555133378477",
+    whatsapp: "5551981221367",
+    whatsappLabel: "(51) 98122-1367",
     email: "portoalegre@sueca.com.br",
     mapsQuery: "Rua Santos Dumont 1000 Porto Alegre RS"
   },
@@ -270,6 +272,8 @@ const branches = {
     address: "Rua Alferes Poli, 2554, bairro Parolin\nCuritiba - PR, CEP 80220-051",
     phone: "(41) 3015-8477",
     phoneHref: "tel:+554130158477",
+    whatsapp: "5541992375817",
+    whatsappLabel: "(41) 99237-5817",
     email: "curitiba@sueca.com.br",
     mapsQuery: "Rua Alferes Poli 2554 Curitiba PR"
   },
@@ -280,6 +284,8 @@ const branches = {
     address: "Rua Natal, 851, bairro Mooca\nSão Paulo - SP, CEP 03186-030",
     phone: "(11) 3388-0477",
     phoneHref: "tel:+551133880477",
+    whatsapp: "551133880477",
+    whatsappLabel: "(11) 3388-0477",
     email: "saopaulo@sueca.com.br",
     mapsQuery: "Rua Natal 851 São Paulo SP"
   },
@@ -290,6 +296,8 @@ const branches = {
     address: "Rua Oeste, 11, Rodoviária Parque, bairro Despraiado\nCuiabá - MT, CEP 78048-120",
     phone: "(65) 3634-8477",
     phoneHref: "tel:+556536348477",
+    whatsapp: "5565992554803",
+    whatsappLabel: "(65) 99255-4803",
     email: "cuiaba@sueca.com.br",
     mapsQuery: "Rua Oeste 11 Rodoviária Parque Cuiabá MT"
   },
@@ -300,10 +308,14 @@ const branches = {
     address: "Av. Castelo Branco, 4770, bairro Rodoviário\nGoiânia - GO, CEP 74430-130",
     phone: "(62) 3157-8484",
     phoneHref: "tel:+556231578484",
+    whatsapp: "5562995021854",
+    whatsappLabel: "(62) 99502-1854",
     email: "goiania@sueca.com.br",
     mapsQuery: "Avenida Castelo Branco 4770 Goiânia GO"
   }
 };
+
+let selectedBranch = "poa";
 
 function initBranchLocator() {
   const map = document.querySelector("#branch-map");
@@ -321,6 +333,16 @@ function initBranchLocator() {
   function selectBranch(key) {
     const branch = branches[key];
     if (!branch) return;
+    selectedBranch = key;
+    const whatsappUrl = `https://wa.me/${branch.whatsapp}`;
+    const footerWhatsapp = document.querySelector(".footer-whatsapp");
+    footerWhatsapp.href = whatsappUrl;
+    footerWhatsapp.querySelector("span").textContent = `WhatsApp ${branch.whatsappLabel}`;
+    footerWhatsapp.setAttribute("aria-label", `WhatsApp ${branch.name}: ${branch.whatsappLabel}`);
+    const floatingWhatsapp = document.querySelector(".whatsapp-float");
+    floatingWhatsapp.href = `${whatsappUrl}?text=${encodeURIComponent("Olá, quero orientação sobre produtos SKF.")}`;
+    floatingWhatsapp.setAttribute("aria-label", `Conversar com ${branch.name} pelo WhatsApp (abre em nova aba)`);
+    floatingWhatsapp.title = `WhatsApp ${branch.name}`;
 
     tabs.forEach((tab) => {
       const active = tab.dataset.branch === key;
@@ -396,7 +418,7 @@ function initBranchLocator() {
       });
 
       map.replaceChild(svg, map.querySelector(".branch-map-fallback"));
-      selectBranch("poa");
+      selectBranch(selectedBranch);
     })
     .catch(() => {});
 
@@ -416,5 +438,5 @@ document.querySelector(".lead-form")?.addEventListener("submit", (event) => {
     `Necessidade: ${data.get("mensagem") || "Não informada"}`
   ].join("\n");
 
-  window.open(`https://wa.me/5551981221367?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+  window.open(`https://wa.me/${branches[selectedBranch].whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
 });

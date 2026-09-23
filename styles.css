@@ -151,7 +151,8 @@ a {
 
 .site-header .menu-toggle {
   background: transparent;
-  border-color: currentColor;
+  border: 0;
+  border-radius: 0;
 }
 
 .site-header:not(.is-dark) .nav-links a:hover {
@@ -1156,14 +1157,18 @@ p {
 .cert-card strong {
   display: grid;
   place-items: center;
-  width: 76px;
+  width: max-content;
+  min-width: 120px;
+  max-width: 100%;
+  padding: 0 16px;
   height: 76px;
   margin-bottom: 22px;
   border: 1px solid var(--line);
   border-radius: 4px;
   color: var(--skf-blue);
   font-family: var(--display);
-  font-size: 30px;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .cert-card .cmp-logo {

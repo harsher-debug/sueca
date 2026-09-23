@@ -346,6 +346,8 @@ a {
 .faq,
 .final-cta,
 .site-footer {
+  --ink: #f5f5f6;
+  --steel: #c5c4c7;
   width: min(1180px, calc(100% - 36px));
   margin: 0 auto;
 }
@@ -1277,15 +1279,144 @@ summary:focus-visible {
 
 .site-footer {
   width: 100%;
-  padding: 38px 0 0;
-  border-top: 3px solid var(--sueca-red);
-  background: #dce5e6;
+  padding: 52px 0 0;
+  border-top: 1px solid #616062;
+  background: linear-gradient(115deg, #2b2c2f 0%, #222225 64%, #3b2427 100%);
   color: var(--ink);
 }
 
 .footer-inner {
   width: min(1180px, calc(100% - 36px));
   margin: 0 auto;
+}
+
+.footer-overview {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+  gap: 48px;
+  padding-bottom: 34px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.footer-brand img {
+  display: block;
+  width: 130px;
+  height: auto;
+  margin-bottom: 18px;
+}
+
+.footer-brand p {
+  max-width: 310px;
+  font-size: 14px;
+}
+
+.footer-overview h3 {
+  margin: 0 0 18px;
+  font: 700 14px var(--body);
+  text-transform: uppercase;
+}
+
+.footer-quick-links,
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-overview a {
+  color: var(--steel);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-quick-links > a,
+.footer-contact-list > a {
+  padding: 8px 0;
+}
+
+.footer-contact-list p {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.footer-overview a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.site-footer .footer-locator,
+.site-footer .branch-detail,
+.site-footer .footer-bottom {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.site-footer .branch-tabs button {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.site-footer .branch-tabs button:hover,
+.site-footer .branch-tabs button.is-active {
+  background: rgba(181, 24, 26, 0.25);
+  border-color: #c55e60;
+}
+
+.site-footer .branch-state,
+.site-footer .footer-heading .eyebrow {
+  color: #efa7a9;
+}
+
+.site-footer .branch-map svg path {
+  fill: #616062;
+  stroke: #c5c4c7;
+}
+
+.site-footer .branch-map svg path.has-branch {
+  fill: #b1adb0;
+}
+
+.site-footer .branch-map svg path.is-active,
+.site-footer .branch-map svg path.has-branch:hover {
+  fill: var(--sueca-red);
+}
+
+.footer-copyright {
+  margin: 0;
+  max-width: 430px;
+  font-size: 12px;
+}
+
+.footer-authorized {
+  color: var(--steel);
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .footer-overview {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-quick-links > a,
+  .footer-contact-list > a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .footer-heading {

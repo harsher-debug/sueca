@@ -2,7 +2,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 
 const menuToggle = document.querySelector(".menu-toggle");
 const siteHeader = document.querySelector(".site-header");
-const darkSections = document.querySelectorAll(".institutional, .solution-band");
+const darkSections = document.querySelectorAll(".institutional, .solution-band, .site-footer");
 const syncHeader = () => {
   const sampleY = siteHeader.offsetHeight / 2;
   const isDark = Array.from(darkSections).some((section) => {

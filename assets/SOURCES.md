@@ -1,7 +1,8 @@
 # Asset sources
 
 - `skf-logo-white.svg`: official white SKF wordmark, https://www.skf.com/v2/assets/img/Skf_logo_white.svg
-- SKF Sans and SKF Display fonts are loaded from https://fonts.skf.com/ (remote, not bundled).
+- SKF Sans and SKF Display fonts: https://fonts.skf.com/, stored locally in `assets/fonts/` for reliable loading.
+- GSAP 3.12.5 and ScrollTrigger 3.12.5: https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/, stored in `assets/vendor/` with original license headers.
 - `skf-home-bearing.jpg`: SKF homepage bearing image, https://cdn.skfmediahub.skf.com/api/public/09f4304c62c3334c/jpeg_fullresolution/09f4304c62c3334c_jpeg_fullresolution.jpg (shown at https://www.skf.com/br).
 - `skf-chains-sueca.jpg`: SKF chains photo, https://www.sueca.com.br/correntes
 - `skf-sensor-bearing-sueca.png`: SKF sensorized bearing photo, https://www.sueca.com.br/unidades-de-rolamento-sensorizado

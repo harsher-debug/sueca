@@ -43,20 +43,7 @@ document.querySelectorAll(".product-card, .cert-card").forEach((item, index) => 
 });
 
 function fallbackReveal() {
-  if (reduceMotion) {
-    document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
-    return;
-  }
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle("is-visible", entry.isIntersecting);
-      });
-    },
-    { threshold: 0.16 }
-  );
-
-  document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
 }
 
 function initCinematicMotion() {
@@ -92,7 +79,7 @@ function initCinematicMotion() {
   const heroTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".hero", start: "top bottom", end: "bottom top",
-      toggleActions: "restart reset restart reset"
+      toggleActions: "play none none none", once: true
     }
   });
   heroTimeline
@@ -104,8 +91,8 @@ function initCinematicMotion() {
     gsap.to(element, {
       autoAlpha: 1, x: 0, y: 0,
       scrollTrigger: {
-        trigger: element, start: "top 84%", end: "top 38%",
-        toggleActions: "restart reset restart reset"
+        trigger: element, start: "top 84%", end: "bottom top",
+        toggleActions: "play none none none", once: true
       }
     });
   });
@@ -122,8 +109,8 @@ function initCinematicMotion() {
       delay: (index % 3) * 0.08,
       overwrite: true,
       scrollTrigger: {
-        trigger: card, start: "top 84%", end: "top 38%",
-        toggleActions: "restart reset restart reset"
+        trigger: card, start: "top 84%", end: "bottom top",
+        toggleActions: "play none none none", once: true
       }
     });
   });
@@ -147,7 +134,7 @@ function initCinematicMotion() {
       trigger: ".cutaway",
       start: "top 72%",
       end: "bottom top",
-      toggleActions: "restart reset restart reset"
+      toggleActions: "play none none none", once: true
     }
   })
     .to(guidePaths, { strokeDashoffset: 0, duration: 0.65, stagger: 0.1, ease: "power2.out" })
@@ -177,9 +164,28 @@ function initCinematicMotion() {
 
   window.addEventListener("load", () => ScrollTrigger.refresh());
   if (document.readyState === "complete") ScrollTrigger.refresh();
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  document.querySelectorAll("img[loading='lazy']").forEach((image) => {
+    image.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+  });
 }
 
-initCinematicMotion();
+try {
+  initCinematicMotion();
+} catch (error) {
+  // Animation failure must never hide content or block menus and forms.
+  window.ScrollTrigger?.getAll().forEach((trigger) => trigger.kill());
+  window.gsap?.globalTimeline.clear();
+  document.body.classList.remove("gsap-ready");
+  document.querySelectorAll(".reveal, .hero-product-media, .diagram-lines path, .diagram-lines circle").forEach((element) => {
+    element.style.removeProperty("opacity");
+    element.style.removeProperty("visibility");
+    element.style.removeProperty("transform");
+    element.style.removeProperty("stroke-dashoffset");
+  });
+  fallbackReveal();
+  console.warn("Anima??es indispon?veis; conte?do preservado.", error);
+}
 
 const productDetails = {
   rolamentos: {

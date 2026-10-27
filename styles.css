@@ -206,8 +206,20 @@ a {
 
 .brand-logo {
   display: block;
-  width: 118px;
+  width: 148px;
   height: auto;
+}
+
+.brand-logo-dark {
+  display: none;
+}
+
+.site-header.is-dark .brand-logo-light {
+  display: none;
+}
+
+.site-header.is-dark .brand-logo-dark {
+  display: block;
 }
 
 .brand small {
@@ -1626,7 +1638,7 @@ summary:focus-visible {
 
 .footer-identity img {
   display: block;
-  width: 120px;
+  width: 148px;
   height: auto;
 }
 

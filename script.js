@@ -104,7 +104,7 @@ function initCinematicMotion() {
     gsap.to(element, {
       autoAlpha: 1, x: 0, y: 0,
       scrollTrigger: {
-        trigger: element, start: "top 94%", end: "bottom top",
+        trigger: element, start: "top 84%", end: "top 38%",
         toggleActions: "restart reset restart reset"
       }
     });
@@ -122,7 +122,7 @@ function initCinematicMotion() {
       delay: (index % 3) * 0.08,
       overwrite: true,
       scrollTrigger: {
-        trigger: card, start: "top 94%", end: "bottom top",
+        trigger: card, start: "top 84%", end: "top 38%",
         toggleActions: "restart reset restart reset"
       }
     });
@@ -176,6 +176,7 @@ function initCinematicMotion() {
   });
 
   window.addEventListener("load", () => ScrollTrigger.refresh());
+  if (document.readyState === "complete") ScrollTrigger.refresh();
 }
 
 initCinematicMotion();

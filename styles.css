@@ -71,7 +71,7 @@ body {
   overflow-x: clip;
   font-family: var(--body);
   color: var(--ink);
-  background: linear-gradient(rgba(235, 242, 244, 0.93), rgba(235, 242, 244, 0.93)), url("assets/application-industrial.jpg") center top / cover fixed;
+  background: linear-gradient(rgba(235, 242, 244, 0.93), rgba(235, 242, 244, 0.93)), url("assets/skf-machining-hero.jpg") center top / cover fixed;
 }
 
 a {

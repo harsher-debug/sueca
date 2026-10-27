@@ -79,7 +79,7 @@ function initCinematicMotion() {
   const heroTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".hero", start: "top bottom", end: "bottom top",
-      toggleActions: "play none none none", once: true
+      toggleActions: "restart none restart none"
     }
   });
   heroTimeline
@@ -92,7 +92,7 @@ function initCinematicMotion() {
       autoAlpha: 1, x: 0, y: 0,
       scrollTrigger: {
         trigger: element, start: "top 84%", end: "bottom top",
-        toggleActions: "play none none none", once: true
+        toggleActions: "restart none restart none"
       }
     });
   });
@@ -110,7 +110,7 @@ function initCinematicMotion() {
       overwrite: true,
       scrollTrigger: {
         trigger: card, start: "top 84%", end: "bottom top",
-        toggleActions: "play none none none", once: true
+        toggleActions: "restart none restart none"
       }
     });
   });
@@ -134,7 +134,7 @@ function initCinematicMotion() {
       trigger: ".cutaway",
       start: "top 72%",
       end: "bottom top",
-      toggleActions: "play none none none", once: true
+      toggleActions: "restart none restart none"
     }
   })
     .to(guidePaths, { strokeDashoffset: 0, duration: 0.65, stagger: 0.1, ease: "power2.out" })

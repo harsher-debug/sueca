@@ -1120,7 +1120,7 @@ p {
   margin: 0;
   padding: 74px 0;
   border-top: 3px solid var(--sueca-red);
-  background: #233541;
+  background: linear-gradient(115deg, #616062 0%, #454447 52%, #303034 100%);
 }
 
 .solution-band-inner {
@@ -1324,7 +1324,7 @@ summary:focus-visible {
   width: 100%;
   padding: 38px 0 0;
   border-top: 3px solid var(--sueca-red);
-  background: linear-gradient(115deg, #303034 0%, #262326 48%, #54272b 100%);
+  background: linear-gradient(115deg, #616062 0%, #3f3e41 48%, #29282b 82%, #4a2224 100%);
   color: var(--ink);
 }
 

@@ -101,22 +101,20 @@ function initCinematicMotion() {
   const guides = cutaway.querySelector(".diagram-lines");
   const paths = [...guides.querySelectorAll("path")];
   const dots = [...guides.querySelectorAll("circle")];
-  const annotations = gsap.timeline({ paused: true });
-  paths.forEach((path, index) => {
+  const callouts = [...cutaway.querySelectorAll(".bearing-callouts .callout")];
+  callouts.forEach((callout, index) => {
+    const path = paths[index];
     const length = path.getTotalLength();
-    annotations.fromTo(path,
+    const entrance = gsap.timeline({ paused: true })
+      .fromTo(callout, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.45 })
+      .fromTo(path,
       { strokeDasharray: length, strokeDashoffset: length },
-      { strokeDashoffset: 0, duration: 0.65 }, index * 0.1);
+      { strokeDashoffset: 0, duration: 0.65 }, 0.1)
+      .fromTo(dots[index], { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
+        { autoAlpha: 1, scale: 1, duration: 0.2 }, 0.55);
+    entries.push({ element: callout, entrance });
   });
-  annotations.fromTo(dots, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
-    { autoAlpha: 1, scale: 1, duration: 0.2, stagger: 0.1 }, 0.2)
-    .fromTo(".bearing-callouts .callout", { autoAlpha: 0, y: 10 },
-      { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.1 }, 0.2);
   const cutawayEntry = entries.find((entry) => entry.element === cutaway);
-  // One entrance timeline owns the panel, lines and labels so they restart together.
-  cutawayEntry.entrance = gsap.timeline({ paused: true })
-    .add(cutawayEntry.entrance.paused(false), 0)
-    .add(annotations.paused(false), 0.2);
   cutawayEntry.loop = gsap.to(".bearing-diagram", {
     y: -8, duration: 3.2, ease: "sine.inOut", repeat: -1, yoyo: true, paused: true
   });

@@ -688,10 +688,16 @@ p {
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: 0.9fr 1fr;
-  gap: 56px;
+  grid-template-columns: 1fr;
+  gap: 38px;
   align-items: center;
   padding: 104px 0;
+}
+
+.skf-force .section-copy {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .section-copy {
@@ -712,8 +718,10 @@ p {
 .cutaway {
   position: relative;
   z-index: 1;
-  min-height: 500px;
-  margin: 0;
+  width: min(100%, 880px);
+  min-height: 600px;
+  aspect-ratio: 1.15;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: var(--radius);
   background: #f9fbfc;
@@ -733,7 +741,7 @@ p {
 .bearing-diagram {
   position: absolute;
   z-index: 1;
-  inset: 19% 5%;
+  inset: 16% 5%;
 }
 
 .cutaway-image {

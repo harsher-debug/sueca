@@ -1283,22 +1283,13 @@ p {
   background: linear-gradient(145deg, #373336, #161719 72%);
 }
 
-.authenticate-visual::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("assets/skf-authenticate-industrial.png") center / cover no-repeat;
-  filter: blur(20px) brightness(0.55);
-  transform: scale(1.1);
-}
-
 .authenticate-visual img {
   position: absolute;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -1896,6 +1887,7 @@ summary:focus-visible {
 
   .authenticate-visual {
     min-height: 460px;
+    height: clamp(460px, 90vw, 760px);
   }
 
   .site-header {
@@ -2032,6 +2024,7 @@ summary:focus-visible {
 
   .authenticate-visual {
     min-height: 410px;
+    height: clamp(410px, 120vw, 600px);
   }
 
   .site-header {

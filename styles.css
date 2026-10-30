@@ -833,7 +833,7 @@ p {
 }
 
 .institutional-inner .eyebrow {
-  color: #efb1b2;
+  color: var(--sueca-red);
 }
 
 .institutional-inner p:not(.eyebrow) {
@@ -1152,7 +1152,7 @@ p {
 }
 
 .solution-band .eyebrow {
-  color: #efb1b2;
+  color: var(--sueca-red);
 }
 
 .solution-band .button {

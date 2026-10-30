@@ -234,9 +234,11 @@ a {
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
-  gap: clamp(12px, 1.5vw, 22px);
+  justify-content: space-between;
+  width: min(100%, 500px);
+  gap: clamp(12px, 1.5vw, 24px);
   color: #fff;
-  font-size: 13px;
+  font-size: clamp(14px, 1.05vw, 16px);
   font-weight: 500;
 }
 
@@ -382,6 +384,16 @@ a {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.89));
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: auto 0 0;
+  height: clamp(48px, 7vw, 90px);
+  background: linear-gradient(to bottom, transparent, rgba(16, 27, 34, 0.8));
   pointer-events: none;
 }
 
@@ -647,14 +659,15 @@ p {
   .hero-visual {
     position: absolute;
     z-index: 1;
-    top: 74px;
+    top: 0;
     right: 0;
     bottom: 0;
     width: min(58vw, 880px);
     height: auto;
     min-height: 0;
     padding: 0;
-    mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 74%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 74%, transparent 100%);
   }
 
   .hero-product-media {
@@ -670,6 +683,11 @@ p {
 }
 
 @media (min-width: 981px) and (max-width: 1180px) {
+  .header-brands { gap: 12px; }
+  .brand-logo { width: 130px; }
+  .skf-header > img { width: 160px; }
+  .nav-links { gap: 10px; font-size: 14px; }
+
   .hero-visual {
     width: 60vw;
   }
@@ -1142,7 +1160,7 @@ p {
 }
 
 .application-panel small {
-  color: var(--sueca-red);
+  color: #fff;
   font-family: var(--utility);
   font-size: 11px;
   font-weight: 600;

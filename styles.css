@@ -1287,63 +1287,20 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(130deg, rgba(181, 24, 26, 0.45), transparent 47%);
+  background: url("assets/skf-authenticate-industrial.png") center / cover no-repeat;
+  filter: blur(20px) brightness(0.55);
+  transform: scale(1.1);
 }
 
-.auth-orbit {
+.authenticate-visual img {
   position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
-
-.auth-orbit-one { width: 650px; height: 650px; top: -270px; right: -180px; }
-.auth-orbit-two { width: 430px; height: 430px; bottom: -230px; left: -110px; border-color: rgba(181, 24, 26, 0.75); }
-
-.auth-package {
-  position: absolute;
-  display: grid;
-  align-content: start;
-  gap: 12px;
-  width: 230px;
-  height: 155px;
-  padding: 18px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--sueca-red) 0 22%, #d8d4d4 22% 26%, #616062 26% 100%);
-  box-shadow: 0 22px 38px rgba(0, 0, 0, 0.3);
-}
-
-.auth-package span { font-family: var(--display); font-size: 28px; letter-spacing: 0.04em; }
-.auth-package-back { top: 100px; right: 96px; transform: rotate(11deg); opacity: 0.64; }
-.auth-package-front { right: 175px; bottom: 74px; transform: rotate(-12deg); }
-.auth-package i { width: 68%; height: 5px; background: rgba(255, 255, 255, 0.75); }
-
-.auth-phone {
-  position: absolute;
-  z-index: 2;
-  top: 71px;
-  right: 70px;
-  width: 230px;
-  height: 410px;
-  padding: 12px;
-  border: 7px solid #111113;
-  border-radius: 32px;
-  background: #111113;
-  box-shadow: 18px 28px 42px rgba(0, 0, 0, 0.42);
-  transform: rotate(10deg);
-}
-
-.auth-phone::before { content: ""; position: absolute; z-index: 2; width: 70px; height: 16px; top: 0; left: 50%; border-radius: 0 0 12px 12px; background: #111113; transform: translateX(-50%); }
-.auth-phone-screen { height: 100%; padding: 50px 18px 25px; color: #fff; background: linear-gradient(160deg, #6f1114, #b5181a 58%, #4a1113); }
-.auth-app-name { display: block; font-family: var(--utility); font-size: 10px; font-weight: 700; letter-spacing: 0.11em; }
-.auth-scan-frame { position: relative; display: grid; place-items: center; width: 145px; height: 145px; margin: 54px auto 27px; border: 2px solid rgba(255, 255, 255, 0.72); }
-.auth-scan-frame b { position: absolute; width: 22px; height: 22px; border: 3px solid #fff; }
-.auth-scan-frame b:nth-child(1) { top: -3px; left: -3px; border-right: 0; border-bottom: 0; }
-.auth-scan-frame b:nth-child(2) { top: -3px; right: -3px; border-left: 0; border-bottom: 0; }
-.auth-scan-frame b:nth-child(3) { bottom: -3px; left: -3px; border-right: 0; border-top: 0; }
-.auth-scan-frame b:nth-child(4) { right: -3px; bottom: -3px; border-left: 0; border-top: 0; }
-.auth-scan-frame em { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: #fff; color: var(--sueca-red); font-size: 30px; font-style: normal; }
-.auth-phone-status { display: block; text-align: center; font-size: 12px; font-weight: 700; }
-.auth-caption { position: absolute; bottom: 25px; left: 30px; color: rgba(255, 255, 255, 0.7); font-family: var(--utility); font-size: 10px; font-weight: 700; letter-spacing: 0.11em; }
 
 .cert-grid {
   grid-template-columns: repeat(3, 1fr);
@@ -1941,21 +1898,6 @@ summary:focus-visible {
     min-height: 460px;
   }
 
-  .auth-phone {
-    top: 22px;
-    right: calc(50% - 155px);
-  }
-
-  .auth-package-back {
-    top: 64px;
-    right: calc(50% - 110px);
-  }
-
-  .auth-package-front {
-    right: calc(50% - 15px);
-    bottom: 64px;
-  }
-
   .site-header {
     z-index: 15;
   }
@@ -2090,33 +2032,6 @@ summary:focus-visible {
 
   .authenticate-visual {
     min-height: 410px;
-  }
-
-  .auth-phone {
-    top: 25px;
-    right: calc(50% - 145px);
-    transform: rotate(7deg) scale(0.82);
-    transform-origin: top center;
-  }
-
-  .auth-package {
-    width: 180px;
-    height: 125px;
-  }
-
-  .auth-package-back {
-    top: 65px;
-    right: calc(50% - 65px);
-  }
-
-  .auth-package-front {
-    right: calc(50% - 30px);
-    bottom: 72px;
-  }
-
-  .auth-caption {
-    left: 22px;
-    font-size: 9px;
   }
 
   .site-header {

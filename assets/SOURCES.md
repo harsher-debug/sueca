@@ -13,6 +13,7 @@
 
 ## Generated illustrative images
 
+- `skf-authenticate-industrial.png`: Generated editorial illustration of a hand holding a phone in an industrial setting, using the user-provided SKF Authenticate screen as a visual reference.
 - `skf-authorized-distributor.png`: Generated with the built-in image generation tool from the user-provided SKF Distribuidor Autorizado mark. Square cobalt-blue field with a white SKF logotype and the Portuguese wording ?DISTRIBUIDOR AUTORIZADO?. Used in the authorized distributor certification card.
 
 - `skf-cmp-mark.png`: Generated using the built-in image generation tool from the user-provided SKF Certified Maintenance Partner logo image as a visual reference. Square cobalt-blue field with white SKF mark and the lines “CERTIFIED / MAINTENANCE / PARTNER”. Placed beside the existing Sueca CMP seal.

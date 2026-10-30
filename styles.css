@@ -761,6 +761,7 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
   pointer-events: none;
 }
 
@@ -824,7 +825,12 @@ p {
 .callout-outer { left: 4%; top: 6%; }
 .callout-rolling { right: 4%; top: 6%; }
 .callout-cage { left: -4%; top: 52%; }
-.callout-inner { right: -4%; top: 52%; }
+.callout-inner { right: -4%; top: 63%; }
+
+@media (min-width: 1181px) {
+  .callout-inner { right: -10%; }
+  .diagram-inner-path { d: path("M1370 1000 H1120"); }
+}
 
 .callout-outer,
 .callout-inner {

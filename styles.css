@@ -724,7 +724,7 @@ p {
   margin: 0 auto;
   overflow: hidden;
   border-radius: var(--radius);
-  background: #f9fbfc;
+  background: rgba(249, 251, 252, 0.78);
   border: 1px solid var(--line);
   box-shadow: 0 18px 42px rgba(16, 35, 52, 0.1);
 }
@@ -792,8 +792,8 @@ p {
 
 .callout {
   position: absolute;
-  width: min(164px, 30%);
-  padding: 10px 11px;
+  width: min(230px, 30%);
+  padding: 14px 16px;
   border-left: 3px solid var(--skf-blue);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.96);
@@ -807,14 +807,14 @@ p {
 
 .callout strong {
   margin-bottom: 3px;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.2;
 }
 
 .callout span {
   color: var(--steel);
-  font-size: 10px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .callout-outer { left: 4%; top: 6%; }
@@ -2283,7 +2283,11 @@ summary:focus-visible {
   }
 
   .cutaway {
-    min-height: 560px;
+    min-height: 620px;
+  }
+
+  .bearing-diagram {
+    inset: 22% 4%;
   }
 
   .cutaway-image {
@@ -2300,15 +2304,15 @@ summary:focus-visible {
 
   .callout {
     width: 44%;
-    padding: 8px;
+    padding: 10px;
   }
 
   .callout strong {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .callout span {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .callout-outer,

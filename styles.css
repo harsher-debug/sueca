@@ -1552,7 +1552,7 @@ summary:focus-visible {
   width: 100%;
   padding: 38px 0 0;
   border-top: 3px solid var(--sueca-red);
-  background: linear-gradient(115deg, #616062 0%, #454346 36%, #3b292b 64%, #7e191c 100%);
+  background: linear-gradient(115deg, #171719 0%, #262326 36%, #3b2528 64%, #7e191c 100%);
   color: var(--ink);
 }
 

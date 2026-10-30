@@ -1294,6 +1294,15 @@ p {
   line-height: 1.55;
 }
 
+.authenticate-copy > .authenticate-app-intro {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.authenticate-app-intro strong {
+  color: var(--sueca-red);
+}
+
 .authenticate-note {
   padding-left: 15px;
   border-left: 3px solid var(--sueca-red);

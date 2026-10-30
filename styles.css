@@ -603,60 +603,31 @@ p {
 }
 
 .hero-product-media {
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   min-width: 0;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
 }
 
 .bearing-photo {
   display: block;
-  width: min(calc(100% + 440px), 900px);
+  width: min(calc(100% + 430px), 1000px);
   max-width: none;
   height: auto;
+  margin-left: clamp(70px, 8vw, 110px);
   flex-shrink: 0;
   animation: bearingTurn 28s linear infinite;
 }
 
 @media (min-width: 981px) and (max-width: 1180px) {
   .bearing-photo {
-    width: min(calc(100% + 300px), 720px);
+    width: min(calc(100% + 300px), 760px);
+    margin-left: clamp(40px, 6vw, 72px);
   }
-
-  .hero-product-note {
-    flex-basis: 145px;
-    padding-left: 12px;
-  }
-}
-
-.hero-product-note {
-  flex: 0 0 165px;
-  padding-left: 16px;
-  border-left: 2px solid var(--sueca-red);
-}
-
-.hero-product-note span {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--skf-blue);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.hero-product-note strong {
-  display: block;
-  font-size: 21px;
-  line-height: 1.15;
-}
-
-.hero-product-note p {
-  margin: 10px 0 0;
-  font-size: 14px;
-  line-height: 1.45;
 }
 
 @keyframes bearingTurn {
@@ -2006,6 +1977,7 @@ summary:focus-visible {
 
   .bearing-photo {
     width: min(calc(100% + 60px), 500px);
+    margin-left: 0;
   }
 
   h1 {
@@ -2231,26 +2203,7 @@ summary:focus-visible {
 
   .bearing-photo {
     width: min(calc(100% + 40px), 310px);
-  }
-
-  .hero-product-note {
-    flex: 0 0 auto;
-    align-self: stretch;
-    padding-left: 10px;
-  }
-
-  .hero-product-note span {
-    margin-bottom: 2px;
-    font-size: 10px;
-  }
-
-  .hero-product-note strong {
-    font-size: 16px;
-  }
-
-  .hero-product-note p {
-    margin-top: 3px;
-    font-size: 12px;
+    margin-left: 0;
   }
 
   .institutional {
@@ -2487,6 +2440,7 @@ summary:focus-visible {
 
   .bearing-photo {
     width: min(calc(100% + 24px), 252px);
+    margin-left: 0;
   }
 
   .brand-logo {

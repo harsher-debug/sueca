@@ -823,8 +823,8 @@ p {
 
 .callout-outer { left: 4%; top: 6%; }
 .callout-rolling { right: 4%; top: 6%; }
-.callout-cage { left: 4%; bottom: 6%; }
-.callout-inner { right: 4%; bottom: 6%; }
+.callout-cage { left: -4%; top: 52%; }
+.callout-inner { right: -4%; top: 52%; }
 
 .callout-outer,
 .callout-inner {
@@ -2326,8 +2326,12 @@ summary:focus-visible {
 
   .callout-cage,
   .callout-inner {
+    top: auto;
     bottom: 3%;
   }
+
+  .callout-cage { left: 4%; }
+  .callout-inner { right: 4%; }
 
   .application-panel h3 {
     font-size: 27px;

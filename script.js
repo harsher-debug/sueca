@@ -98,22 +98,23 @@ function initCinematicMotion() {
   });
 
   const cutaway = document.querySelector(".cutaway");
-  const guides = cutaway.querySelector(".diagram-lines");
-  const paths = [...guides.querySelectorAll("path")];
-  const dots = [...guides.querySelectorAll("circle")];
+  const guides = [...cutaway.querySelectorAll(".diagram-lines")];
   const callouts = [...cutaway.querySelectorAll(".bearing-callouts .callout")];
   const calloutEntries = [];
   callouts.forEach((callout, index) => {
-    const path = paths[index];
-    const length = path.getTotalLength();
     const entrance = gsap.timeline({ paused: true })
       .fromTo(callout, { autoAlpha: 0, x: index % 2 ? 42 : -42, y: 28, scale: 0.94 },
-        { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.8 })
-      .fromTo(path,
+        { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.8 });
+    guides.forEach((guide) => {
+      const path = guide.querySelectorAll("path")[index];
+      const dot = guide.querySelectorAll("circle")[index];
+      const length = path.getTotalLength();
+      entrance.fromTo(path,
         { strokeDasharray: length, strokeDashoffset: length },
         { strokeDashoffset: 0, duration: 0.9 }, 0.15)
-      .fromTo(dots[index], { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
-        { autoAlpha: 1, scale: 1, duration: 0.25 }, 0.8);
+        .fromTo(dot, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
+          { autoAlpha: 1, scale: 1, duration: 0.25 }, 0.8);
+    });
     calloutEntries.push({ element: callout, entrance });
   });
   const cutawayEntry = entries.find((entry) => entry.element === cutaway);

@@ -46,145 +46,88 @@ function fallbackReveal() {
   document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
 }
 
+// Re-arm entrances only after the block leaves the viewport completely.
+function observeMotion(entries) {
+  const states = new Map(entries.map((entry) => [entry.element, { ...entry, visible: false }]));
+  const observer = new IntersectionObserver((changes) => {
+    changes.forEach((change) => {
+      const state = states.get(change.target);
+      const visible = change.isIntersecting;
+      if (!state || state.visible === visible) return;
+      state.visible = visible;
+      if (visible) {
+        state.entrance?.restart(true);
+        state.loop?.play();
+      } else {
+        state.entrance?.pause(0);
+        state.loop?.pause();
+      }
+    });
+  }, { threshold: 0 });
+  states.forEach((_, element) => observer.observe(element));
+  return observer;
+}
+
 function initCinematicMotion() {
-  if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
+  if (!window.gsap || reduceMotion || !("IntersectionObserver" in window)) {
     fallbackReveal();
     return;
   }
-
   document.body.classList.add("gsap-ready");
-  gsap.registerPlugin(ScrollTrigger);
   gsap.defaults({ ease: "power3.out", duration: 0.8 });
+  const smallScreen = window.matchMedia("(max-width: 640px)").matches;
+  const sideOffset = smallScreen ? 24 : 64;
+  const entries = [];
+  const hero = document.querySelector(".hero");
+  const heroTimeline = gsap.timeline({ paused: true })
+    .fromTo(".hero-copy", { autoAlpha: 0, x: -sideOffset }, { autoAlpha: 1, x: 0, duration: 0.9 })
+    .fromTo(".hero-visual", { autoAlpha: 0, x: sideOffset }, { autoAlpha: 1, x: 0, duration: 0.9 }, 0.06)
+    .fromTo(".hero-product-media", { autoAlpha: 0, x: 80, rotation: -12, scale: 0.95 },
+      { autoAlpha: 1, x: 0, rotation: 0, scale: 1, duration: 1.4 }, 0.18);
+  entries.push({ element: hero, entrance: heroTimeline });
 
-  const sideOffset = window.matchMedia("(max-width: 640px)").matches
-    ? 24
-    : window.matchMedia("(max-width: 980px)").matches ? 40 : 64;
-  gsap.set(".reveal", {
-    autoAlpha: 0,
-    x: (_, element) => {
-      if (element.matches(".hero-copy") || element.dataset.motion === "left") return -sideOffset;
-      if (element.matches(".hero-visual") || element.dataset.motion === "right") return sideOffset;
-      return 0;
-    },
-    y: (_, element) => element.dataset.motion || element.matches(".hero-copy, .hero-visual") ? 0 : 34
-  });
-  gsap.set(".hero-product-media", {
-    autoAlpha: 0,
-    x: 80,
-    rotation: -12,
-    scale: 0.95,
-    transformOrigin: "50% 50%"
-  });
-
-  const heroTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".hero", start: "top bottom", end: "bottom top",
-      toggleActions: "restart none restart none"
-    }
-  });
-  heroTimeline
-    .to(".hero-copy", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 })
-    .to(".hero-visual", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 }, "<0.06")
-    .to(".hero-product-media", { autoAlpha: 1, x: 0, rotation: 0, scale: 1, duration: 1.4 }, "<0.12");
-
-  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual):not(.product-card)").forEach((element) => {
-    gsap.to(element, {
-      autoAlpha: 1, x: 0, y: 0,
-      scrollTrigger: {
-        trigger: element, start: "top 84%", end: "bottom top",
-        toggleActions: "restart none restart none"
-      }
-    });
+  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual)").forEach((element) => {
+    const product = element.matches(".product-card");
+    const direction = element.dataset.motion === "right" ? 1 : -1;
+    const travel = product ? (smallScreen ? 84 : 180) : sideOffset;
+    const entrance = gsap.fromTo(element,
+      { autoAlpha: 0, x: direction * travel, scale: product ? 0.96 : 1 },
+      { autoAlpha: 1, x: 0, scale: 1, duration: product ? 1.05 : 0.8, paused: true }
+    );
+    entries.push({ element, entrance });
   });
 
-  const productTravel = window.matchMedia("(max-width: 640px)").matches ? 84 : 180;
-  gsap.utils.toArray(".product-card").forEach((card, index) => {
-    const direction = card.dataset.motion === "left" ? -1 : 1;
-    gsap.set(card, { autoAlpha: 0, x: direction * productTravel, y: 0, scale: 0.96 });
-    gsap.to(card, {
-      autoAlpha: 1,
-      x: 0,
-      scale: 1,
-      duration: 1.05,
-      delay: (index % 3) * 0.08,
-      overwrite: true,
-      scrollTrigger: {
-        trigger: card, start: "top 84%", end: "bottom top",
-        toggleActions: "restart none restart none"
-      }
-    });
-  });
-
-  const visibleGuides = document.querySelector(".diagram-lines");
-  const guidePaths = gsap.utils.toArray(visibleGuides.querySelectorAll("path"));
-  const guideDots = gsap.utils.toArray(visibleGuides.querySelectorAll("circle"));
-
-  guidePaths.forEach((path) => {
+  const cutaway = document.querySelector(".cutaway");
+  const guides = cutaway.querySelector(".diagram-lines");
+  const paths = [...guides.querySelectorAll("path")];
+  const dots = [...guides.querySelectorAll("circle")];
+  const annotations = gsap.timeline({ paused: true });
+  paths.forEach((path, index) => {
     const length = path.getTotalLength();
-    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+    annotations.fromTo(path,
+      { strokeDasharray: length, strokeDashoffset: length },
+      { strokeDashoffset: 0, duration: 0.65 }, index * 0.1);
   });
-  gsap.set(guideDots, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" });
-  gsap.set(".bearing-callouts .callout", { autoAlpha: 0, y: 10 });
-
-  // Move the illustration and its pointers together to preserve alignment.
-  const bearingFloat = gsap.to(".bearing-diagram", {
-    y: -8,
-    duration: 3.2,
-    ease: "sine.inOut",
-    repeat: -1,
-    yoyo: true,
-    paused: true
+  annotations.fromTo(dots, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" },
+    { autoAlpha: 1, scale: 1, duration: 0.2, stagger: 0.1 }, 0.2)
+    .fromTo(".bearing-callouts .callout", { autoAlpha: 0, y: 10 },
+      { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.1 }, 0.2);
+  const cutawayEntry = entries.find((entry) => entry.element === cutaway);
+  // One entrance timeline owns the panel, lines and labels so they restart together.
+  cutawayEntry.entrance = gsap.timeline({ paused: true })
+    .add(cutawayEntry.entrance.paused(false), 0)
+    .add(annotations.paused(false), 0.2);
+  cutawayEntry.loop = gsap.to(".bearing-diagram", {
+    y: -8, duration: 3.2, ease: "sine.inOut", repeat: -1, yoyo: true, paused: true
   });
-  ScrollTrigger.create({
-    trigger: ".cutaway",
-    start: "top bottom",
-    end: "bottom top",
-    onToggle: (self) => self.isActive ? bearingFloat.play() : bearingFloat.pause()
-  });
-
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: ".cutaway",
-      start: "top 72%",
-      end: "bottom top",
-      toggleActions: "restart none restart none"
-    }
-  })
-    .to(guidePaths, { strokeDashoffset: 0, duration: 0.65, stagger: 0.1, ease: "power2.out" })
-    .to(guideDots, { autoAlpha: 1, scale: 1, duration: 0.2, stagger: 0.1 }, "<0.2")
-    .to(".bearing-callouts .callout", { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.1 }, 0.2);
-
+  // Pause decorative motion outside the viewport.
   gsap.utils.toArray(".float-shape").forEach((shape, index) => {
-    const drift = gsap.to(shape, {
-      y: index % 2 === 0 ? -18 : 14,
-      rotation: "+=6",
-      duration: 4 + index * 0.45,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-      paused: true
-    });
-
-    ScrollTrigger.create({
-      trigger: shape.closest("section"),
-      start: "top bottom",
-      end: "bottom top",
-      onEnter: () => drift.play(),
-      onLeave: () => drift.pause(),
-      onEnterBack: () => drift.play(),
-      onLeaveBack: () => drift.pause()
-    });
+    entries.push({ element: shape, loop: gsap.to(shape, {
+      y: index % 2 ? 14 : -18, rotation: 6, duration: 4 + index * 0.45,
+      ease: "sine.inOut", repeat: -1, yoyo: true, paused: true
+    }) });
   });
-
-  window.addEventListener("load", () => ScrollTrigger.refresh());
-  if (document.readyState === "complete") ScrollTrigger.refresh();
-  document.querySelectorAll("details").forEach((detail) => {
-    detail.addEventListener("toggle", () => ScrollTrigger.refresh());
-  });
-  document.fonts?.ready.then(() => ScrollTrigger.refresh());
-  document.querySelectorAll("img[loading='lazy']").forEach((image) => {
-    image.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
-  });
+  observeMotion(entries);
 }
 
 try {

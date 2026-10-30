@@ -1,6 +1,7 @@
 # Asset sources
 
-- `sueca-logo-header-light.png`: Light-header version derived from the existing Sueca logo assets, matching the gray/red palette while carrying the metallic spheres in the C from the footer mark.
+- `sueca-logo-original.png`: Original Sueca logo supplied by the user, including its metallic spheres.
+- `sueca-logo-original-dark.svg`: Dark-background version of that same image, with white lettering and the original red accent and metallic spheres.
 - `skf-logo-white.svg`: official white SKF wordmark, https://www.skf.com/v2/assets/img/Skf_logo_white.svg
 - SKF Sans and SKF Display fonts: https://fonts.skf.com/, stored locally in `assets/fonts/` for reliable loading.
 - GSAP 3.12.5 and ScrollTrigger 3.12.5: https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/, stored in `assets/vendor/` with original license headers.

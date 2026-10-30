@@ -614,11 +614,22 @@ p {
 
 .bearing-photo {
   display: block;
-  width: min(calc(100% + 110px), calc(100dvh - 80px));
+  width: min(calc(100% + 440px), 900px);
   max-width: none;
   height: auto;
   flex-shrink: 0;
   animation: bearingTurn 28s linear infinite;
+}
+
+@media (min-width: 981px) and (max-width: 1180px) {
+  .bearing-photo {
+    width: min(calc(100% + 300px), 720px);
+  }
+
+  .hero-product-note {
+    flex-basis: 145px;
+    padding-left: 12px;
+  }
 }
 
 .hero-product-note {
@@ -1361,17 +1372,34 @@ p {
 .cmp-logos {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 84px;
+  min-height: 104px;
   margin-bottom: 18px;
 }
 
 .cert-card .cmp-mark {
   display: block;
-  width: 82px;
-  height: 84px;
+  width: 104px;
+  height: 104px;
   object-fit: contain;
   flex: 0 0 auto;
+}
+
+.cert-agro-icon {
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  margin: -8px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--sueca-red);
+  background: #fff;
+}
+
+.cert-agro-icon img {
+  width: 56px;
+  height: 56px;
+  filter: invert(15%) sepia(92%) saturate(2739%) hue-rotate(341deg) brightness(91%) contrast(96%);
 }
 
 .cert-card .cert-authorized-logo {

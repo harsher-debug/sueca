@@ -707,9 +707,9 @@ p {
   isolation: isolate;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 38px;
+  gap: 24px;
   align-items: center;
-  padding: 104px 0;
+  padding: 52px 0 32px;
 }
 
 .skf-force .section-copy {
@@ -737,7 +737,7 @@ p {
   position: relative;
   z-index: 1;
   width: min(100%, 880px);
-  min-height: 600px;
+  min-height: 0;
   aspect-ratio: 1.15;
   margin: 0 auto;
 }
@@ -841,7 +841,15 @@ p {
 .applications,
 .certifications,
 .faq {
-  padding: 88px 0;
+  padding: 64px 0;
+}
+
+.certifications {
+  padding-bottom: 28px;
+}
+
+.portfolio {
+  padding-top: 28px;
 }
 
 .section-heading {
@@ -1148,10 +1156,13 @@ p {
 .application-content {
   position: relative;
   z-index: 1;
+  width: 100%;
   padding: 36px;
 }
 
 .application-panel small {
+  display: block;
+  min-height: 14px;
   color: #fff;
   font-family: var(--utility);
   font-size: 11px;
@@ -1163,6 +1174,7 @@ p {
 
 .application-panel h3 {
   max-width: 440px;
+  min-height: 72px;
   margin: 14px 0 8px;
   font-size: 31px;
   font-family: var(--body);
@@ -1171,6 +1183,7 @@ p {
 }
 
 .application-panel p {
+  min-height: 24px;
   margin: 0;
   color: rgba(255, 255, 255, 0.88);
 }
@@ -1239,7 +1252,7 @@ p {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid rgba(97, 96, 98, 0.2);
-  background: linear-gradient(130deg, rgba(255, 255, 255, 0.94), rgba(238, 236, 236, 0.86));
+  background: linear-gradient(135deg, #fff 0%, #f3f4f4 100%);
   box-shadow: 0 24px 64px rgba(38, 35, 37, 0.1);
 }
 
@@ -1251,11 +1264,26 @@ p {
   padding: clamp(42px, 6vw, 78px);
 }
 
+.authenticate-copy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: clamp(42px, 6vw, 78px);
+  width: 76px;
+  height: 5px;
+  border-radius: 0 0 5px 5px;
+  background: var(--sueca-red);
+}
+
 .authenticate h2 {
   max-width: 530px;
   margin: 0 0 22px;
   font-size: clamp(35px, 4vw, 58px);
   line-height: 0.98;
+}
+
+.authenticate h2 span {
+  color: var(--sueca-red);
 }
 
 .authenticate-copy > p:not(.eyebrow) {
@@ -1274,6 +1302,20 @@ p {
 .authenticate-copy > .authenticate-note {
   margin-top: 20px;
   font-size: 14px;
+}
+
+.authenticate-copy > .authenticate-trust {
+  margin-top: 20px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #e9ebed;
+  color: var(--graphite);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.authenticate-trust strong {
+  color: var(--sueca-red);
 }
 
 .authenticate-actions {
@@ -1338,6 +1380,14 @@ p {
   object-position: center;
 }
 
+.authenticate-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, transparent 75%, rgba(180, 18, 30, 0.5) 75%, rgba(120, 7, 17, 0.72) 100%);
+}
+
 .cert-grid {
   grid-template-columns: repeat(3, 1fr);
 }
@@ -1370,7 +1420,7 @@ p {
 .cmp-logos {
   display: flex;
   align-items: center;
-  width: 104px;
+  width: 180px;
   height: 104px;
   margin: -8px 0 8px;
   background: rgb(0, 2, 253);
@@ -1378,10 +1428,10 @@ p {
 
 .cert-card .cmp-mark {
   display: block;
-  width: 104px;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  flex: 0 0 auto;
+  flex: 1 1 auto;
 }
 
 .cert-agro-icon {
@@ -1404,7 +1454,7 @@ p {
 
 .cert-card .cert-authorized-logo {
   display: block;
-  width: 100%;
+  width: 180px;
   height: 104px;
   margin: -8px 0 8px;
   object-fit: contain;
@@ -2280,6 +2330,14 @@ summary:focus-visible {
     min-height: 390px;
   }
 
+  .application-panel h3 {
+    min-height: 0;
+  }
+
+  .application-panel p {
+    min-height: 0;
+  }
+
   .application-content {
     padding: 26px;
   }
@@ -2293,7 +2351,8 @@ summary:focus-visible {
   }
 
   .cutaway {
-    min-height: 620px;
+    min-height: 0;
+    aspect-ratio: 0.92;
   }
 
   .bearing-diagram {

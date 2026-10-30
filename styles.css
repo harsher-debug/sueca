@@ -1389,14 +1389,6 @@ p {
   object-position: center 43%;
 }
 
-.authenticate-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(135deg, transparent 75%, rgba(180, 18, 30, 0.5) 75%, rgba(120, 7, 17, 0.72) 100%);
-}
-
 .cert-grid {
   grid-template-columns: repeat(3, 1fr);
 }

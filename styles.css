@@ -1071,20 +1071,29 @@ p {
   justify-content: space-between;
   gap: 24px;
   margin-top: 34px;
-  padding-top: 26px;
-  border-top: 1px solid rgba(48, 72, 91, 0.24);
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(110deg, #8a1115, #b5181a 65%, #ce3031);
 }
 
 .portfolio-inquiry p {
   max-width: 640px;
   margin: 0;
-  color: var(--ink);
+  color: #fff;
   font-size: 17px;
   font-weight: 700;
 }
 
 .portfolio-inquiry .button {
   flex: 0 0 auto;
+  border-color: transparent;
+  color: #8a1115;
+  background: #fff;
+}
+
+.portfolio-inquiry .button:hover {
+  border-color: transparent;
+  background: #f7eeee;
 }
 
 .application-compare {
@@ -2236,6 +2245,8 @@ summary:focus-visible {
 
   .portfolio-inquiry {
     display: grid;
+    gap: 12px;
+    padding: 16px 20px;
   }
 
   .portfolio-inquiry p {

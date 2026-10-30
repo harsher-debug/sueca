@@ -1509,6 +1509,30 @@ summary:focus-visible {
   margin: 0 auto;
 }
 
+.branch-location {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 12px;
+  color: var(--steel);
+  font-size: 13px;
+}
+
+.branch-location p { margin: 0; }
+
+.branch-location button {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
 .site-footer .footer-heading .eyebrow,
 .site-footer .branch-state {
   color: var(--steel);

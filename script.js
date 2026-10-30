@@ -236,6 +236,7 @@ productDialog.addEventListener("close", () => lastProductTrigger?.focus());
 
 const branches = {
   poa: {
+    coordinates: [-30.0066953, -51.2050388],
     stateCode: "43",
     state: "Rio Grande do Sul",
     name: "Matriz Porto Alegre",
@@ -248,6 +249,7 @@ const branches = {
     mapsQuery: "Rua Santos Dumont 1000 Porto Alegre RS"
   },
   curitiba: {
+    coordinates: [-25.4581574, -49.2633884],
     stateCode: "41",
     state: "Paraná",
     name: "Filial Curitiba",
@@ -260,6 +262,7 @@ const branches = {
     mapsQuery: "Rua Alferes Poli 2554 Curitiba PR"
   },
   sp: {
+    coordinates: [-23.5666453, -46.5823999],
     stateCode: "35",
     state: "São Paulo",
     name: "Filial São Paulo",
@@ -272,6 +275,7 @@ const branches = {
     mapsQuery: "Rua Natal 851 São Paulo SP"
   },
   cuiaba: {
+    coordinates: [-15.5790364, -56.0882622],
     stateCode: "51",
     state: "Mato Grosso",
     name: "Filial Cuiabá",
@@ -284,6 +288,7 @@ const branches = {
     mapsQuery: "Rua Oeste 11 Rodoviária Parque Cuiabá MT"
   },
   goiania: {
+    coordinates: [-16.6697847, -49.3116456],
     stateCode: "52",
     state: "Goiás",
     name: "Filial Goiânia",
@@ -299,6 +304,18 @@ const branches = {
 
 let selectedBranch = "poa";
 
+function nearestBranch(latitude, longitude) {
+  const radians = (degrees) => degrees * Math.PI / 180;
+  return Object.entries(branches).reduce((closest, [key, branch]) => {
+    const [branchLat, branchLon] = branch.coordinates;
+    const latDiff = radians(branchLat - latitude);
+    const lonDiff = radians(branchLon - longitude);
+    const distance = Math.sin(latDiff / 2) ** 2 +
+      Math.cos(radians(latitude)) * Math.cos(radians(branchLat)) * Math.sin(lonDiff / 2) ** 2;
+    return distance < closest.distance ? { key, distance } : closest;
+  }, { key: "poa", distance: Infinity }).key;
+}
+
 function initBranchLocator() {
   const map = document.querySelector("#branch-map");
   const tabs = [...document.querySelectorAll(".branch-tabs button")];
@@ -311,10 +328,18 @@ function initBranchLocator() {
   const phone = document.querySelector("#branch-phone");
   const email = document.querySelector("#branch-email");
   const route = document.querySelector("#branch-route");
+  const locationStatus = document.querySelector("#branch-location-status");
+  const locationRetry = document.querySelector("#branch-location-retry");
+  let manualSelection = false;
+  let locationRequest = 0;
 
-  function selectBranch(key) {
+  function selectBranch(key, manual = false) {
     const branch = branches[key];
     if (!branch) return;
+    if (manual) {
+      manualSelection = true;
+      locationStatus.textContent = "Filial selecionada manualmente. Você pode escolher outra unidade a qualquer momento.";
+    }
     selectedBranch = key;
     const whatsappUrl = `https://wa.me/${branch.whatsapp}`;
     const footerWhatsapp = document.querySelector(".footer-whatsapp");
@@ -351,7 +376,7 @@ function initBranchLocator() {
   }
 
   document.querySelectorAll(".branch-tabs button, .map-pin").forEach((control) => {
-    control.addEventListener("click", () => selectBranch(control.dataset.branch));
+    control.addEventListener("click", () => selectBranch(control.dataset.branch, true));
   });
 
   tabs.forEach((tab, index) => {
@@ -364,7 +389,7 @@ function initBranchLocator() {
       }[event.key];
       if (next === undefined) return;
       event.preventDefault();
-      selectBranch(tabs[next].dataset.branch);
+      selectBranch(tabs[next].dataset.branch, true);
       tabs[next].focus();
     });
   });
@@ -390,11 +415,11 @@ function initBranchLocator() {
         path.setAttribute("role", "button");
         path.setAttribute("tabindex", "0");
         path.setAttribute("aria-label", `Selecionar ${branch.name}, ${branch.state}`);
-        path.addEventListener("click", () => selectBranch(key));
+        path.addEventListener("click", () => selectBranch(key, true));
         path.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            selectBranch(key);
+            selectBranch(key, true);
           }
         });
       });
@@ -405,6 +430,35 @@ function initBranchLocator() {
     .catch(() => {});
 
   selectBranch("poa");
+
+  function findNearbyBranch() {
+    const request = ++locationRequest;
+    manualSelection = false;
+    if (!navigator.geolocation) {
+      locationStatus.textContent = "Localização indisponível neste navegador. Escolha sua filial abaixo.";
+      return;
+    }
+    locationStatus.textContent = "Aguardando sua autorização para encontrar a filial mais próxima.";
+    navigator.geolocation.getCurrentPosition((position) => {
+      if (request !== locationRequest || manualSelection) return;
+      const { latitude, longitude } = position.coords;
+      if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+        locationStatus.textContent = "Não foi possível identificar sua localização. Escolha sua filial abaixo.";
+        return;
+      }
+      const key = nearestBranch(latitude, longitude);
+      selectBranch(key);
+      locationStatus.textContent = `Filial mais próxima: ${branches[key].name}. Você também pode escolher outra unidade.`;
+    }, (error) => {
+      if (request !== locationRequest || manualSelection) return;
+      locationStatus.textContent = error.code === 1
+        ? "Localização não autorizada. Escolha sua filial abaixo."
+        : "Não foi possível identificar sua localização. Escolha sua filial abaixo.";
+    }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 300000 });
+  }
+
+  locationRetry.addEventListener("click", findNearbyBranch);
+  findNearbyBranch();
 }
 
 initBranchLocator();

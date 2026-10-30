@@ -11,6 +11,10 @@
 
 ## Generated illustrative images
 
+- `skf-authorized-distributor.png`: Generated with the built-in image generation tool from the user-provided SKF Distribuidor Autorizado mark. Square cobalt-blue field with a white SKF logotype and the Portuguese wording ?DISTRIBUIDOR AUTORIZADO?. Used in the authorized distributor certification card.
+
+- `skf-cmp-mark.png`: Generated using the built-in image generation tool from the user-provided SKF Certified Maintenance Partner logo image as a visual reference. Square cobalt-blue field with white SKF mark and the lines “CERTIFIED / MAINTENANCE / PARTNER”. Placed beside the existing Sueca CMP seal.
+
 - `bearing-exploded-realistic.png`: Generated with the built-in image generation tool. Final prompt: One photorealistic exploded illustration of a single open deep-groove ball bearing on transparent background. Four coaxial layers along an upper-left to lower-right axis: outer race, polished steel balls, stamped cage, inner race. Visible air gaps and hollow center; brushed steel microtexture, machining grooves, crisp chamfers and controlled studio reflections. One continuous composition, no panels, labels, arrows or logos. Educational illustration, not a product photograph. Descriptions and callout lines are rendered in HTML/SVG.
 
 - `bearing-components.png`: Created with the built-in image generation tool. Prompt: Square transparent 2 by 2 sprite atlas of four isolated deep groove ball bearing components: outer race at top left, circular array of polished balls at top right, empty stamped steel cage at bottom left, inner race at bottom right. Photorealistic ground steel, fine machining texture, studio reflections, matching three-quarter perspective, separate cells with clear margins, no labels or logos. Educational illustration; components are not to scale. CSS displays each quadrant as a separate animated layer.

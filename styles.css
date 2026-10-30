@@ -1352,9 +1352,33 @@ p {
 
 .cert-card .cmp-logo {
   display: block;
-  width: min(100%, 180px);
+  width: min(58%, 180px);
   height: 76px;
-  margin-bottom: 22px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.cmp-logos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 84px;
+  margin-bottom: 18px;
+}
+
+.cert-card .cmp-mark {
+  display: block;
+  width: 82px;
+  height: 84px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.cert-card .cert-authorized-logo {
+  display: block;
+  width: 100%;
+  height: 104px;
+  margin: -8px 0 8px;
   object-fit: contain;
   object-position: left center;
 }

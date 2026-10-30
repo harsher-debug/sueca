@@ -14,7 +14,7 @@
     <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
     <script defer src="script.js"></script>
   </head>
-  <body class="cinematic">
+  <body class="cinematic" id="inicio">
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="site-header" aria-label="Navegação principal">
@@ -97,15 +97,15 @@
         </div>
       </section>
 
-      <section class="skf-force section-grid">
+      <section class="skf-force section-grid" aria-labelledby="bearing-title">
         <span class="float-shape float-shape-cross" aria-hidden="true"></span>
         <div class="section-copy reveal">
           <p class="eyebrow">A força da SKF</p>
-          <h2>Por dentro da precisão SKF.</h2>
+          <h2 id="bearing-title">Por dentro da precisão SKF.</h2>
           <p>Engenharia em cada componente. Escolha técnica para cada aplicação.</p>
         </div>
         <figure class="cutaway reveal" aria-label="Componentes de um rolamento SKF">
-          <img class="cutaway-image" src="assets/skf-bearing.png" alt="Rolamento SKF em corte mostrando anéis e esferas" loading="lazy" />
+          <img class="cutaway-image" src="assets/skf-bearing-detailed.png" alt="Ilustração detalhada de rolamento em corte mostrando anéis de aço usinado, esferas e gaiola" loading="lazy" decoding="async" />
           <svg class="diagram-lines diagram-lines-desktop" viewBox="0 0 600 500" preserveAspectRatio="none" aria-hidden="true">
             <path d="M170 72 H202 L220 164" /><circle cx="220" cy="164" r="4" />
             <path d="M430 72 H378 L300 110" /><circle cx="300" cy="110" r="4" />
@@ -125,6 +125,31 @@
             <li class="callout callout-inner"><strong>Anel interno</strong><span>Acompanha o eixo em rotação.</span></li>
           </ul>
         </figure>
+        <div class="bearing-exploded" aria-labelledby="bearing-parts-title">
+          <div class="bearing-parts-heading">
+            <div><p class="eyebrow">Cada peça tem uma função</p><h3 id="bearing-parts-title">O rolamento, parte por parte.</h3></div>
+            <p>Explore os componentes ao rolar a página. <span aria-hidden="true">↓</span></p>
+          </div>
+          <ol class="bearing-parts">
+            <li class="bearing-part">
+              <div class="bearing-part-image part-outer" role="img" aria-label="Anel externo de aço, isolado"></div>
+              <div class="bearing-part-copy"><span class="part-number">01</span><h4>Anel externo</h4><p>Encaixa no alojamento e oferece a pista externa por onde as esferas rolam, transmitindo as cargas para a estrutura.</p></div>
+            </li>
+            <li class="bearing-part">
+              <div class="bearing-part-image part-balls" role="img" aria-label="Conjunto de esferas de aço, separado dos anéis"></div>
+              <div class="bearing-part-copy"><span class="part-number">02</span><h4>Elementos rolantes</h4><p>As esferas transferem as cargas entre os anéis e permitem o movimento de rotação com baixo atrito.</p></div>
+            </li>
+            <li class="bearing-part">
+              <div class="bearing-part-image part-cage" role="img" aria-label="Gaiola metálica com espaços para as esferas"></div>
+              <div class="bearing-part-copy"><span class="part-number">03</span><h4>Gaiola</h4><p>Mantém as esferas separadas e distribuídas ao longo da pista, guiando seu movimento dentro do conjunto.</p></div>
+            </li>
+            <li class="bearing-part">
+              <div class="bearing-part-image part-inner" role="img" aria-label="Anel interno de aço com abertura para o eixo"></div>
+              <div class="bearing-part-copy"><span class="part-number">04</span><h4>Anel interno</h4><p>Encaixa no eixo e oferece a pista interna de rolamento, transmitindo as cargas do eixo para as esferas.</p></div>
+            </li>
+          </ol>
+          <p class="bearing-illustration-note">Representação ilustrativa dos componentes, fora de escala.</p>
+        </div>
       </section>
 
       <section class="portfolio" id="portfolio">
@@ -428,5 +453,8 @@
       <span>WhatsApp</span>
     </a>
 
+    <a class="back-to-top" href="#inicio" aria-label="Voltar ao início da página" title="Voltar ao início" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 11 6-6 6 6M12 5v14" /></svg>
+    </a>
   </body>
 </html>

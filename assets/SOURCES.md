@@ -11,6 +11,10 @@
 
 ## Generated illustrative images
 
+- `bearing-components.png`: Created with the built-in image generation tool. Prompt: Square transparent 2 by 2 sprite atlas of four isolated deep groove ball bearing components: outer race at top left, circular array of polished balls at top right, empty stamped steel cage at bottom left, inner race at bottom right. Photorealistic ground steel, fine machining texture, studio reflections, matching three-quarter perspective, separate cells with clear margins, no labels or logos. Educational illustration; components are not to scale. CSS displays each quadrant as a separate animated layer.
+
+- `skf-bearing-detailed.png`: Generated with the built-in image generation tool, editing `skf-bearing.png`. Prompt: Improve the bearing cutaway with photorealistic machined steel microtexture, concentric machining marks, crisp beveled edges, natural metallic reflections, detailed stamped steel cage and clear separation between races and balls. Preserve original geometry, silhouette, orientation, camera perspective, framing and component positions for existing callouts. Transparent background with subtle contact shadow; no text, labels, arrows, logos or watermark. Illustrative rendering, not a product photograph.
+
 Created with the built-in `imagegen` tool and optimized as JPEGs. These are illustrative scenes, not photographs of Sueca employees, facilities, or customer installations.
 
 - `institutional-industrial.jpg`: Prompt: Cinematic editorial photograph of a Brazilian industrial maintenance engineer in a modern factory, standing on the right in dark workwear and safety glasses, realistic machinery and shafts, cool natural window light, subtle red industrial details, clean darker negative space on the left for white typography, premium industrial advertising, no logos, no text, landscape.

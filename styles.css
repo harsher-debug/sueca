@@ -1459,7 +1459,8 @@ p {
   height: 104px;
   margin: -8px 0 8px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
+  background: rgb(0, 2, 253);
 }
 
 .faq-list {

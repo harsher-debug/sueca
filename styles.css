@@ -618,6 +618,7 @@ p {
   max-width: none;
   height: auto;
   flex-shrink: 0;
+  animation: bearingTurn 28s linear infinite;
 }
 
 .hero-product-note {
@@ -647,6 +648,10 @@ p {
   line-height: 1.45;
 }
 
+@keyframes bearingTurn {
+  to { transform: rotate(360deg); }
+}
+
 .skf-force {
   position: relative;
   isolation: isolate;
@@ -663,41 +668,13 @@ p {
   max-width: 620px;
 }
 
-.bearing-exploded { grid-column: 1 / -1; min-width: 0; padding-top: 20px; }
-.bearing-parts-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
-.bearing-parts-heading h3 { margin: 0; font-size: clamp(28px, 3vw, 42px); line-height: 1.1; }
-.bearing-parts-heading > p { max-width: 240px; margin: 0; color: var(--steel); font-size: 14px; line-height: 1.5; }
-.bearing-parts-heading > p span { color: var(--sueca-red); }
-.bearing-parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; margin: 0; padding: 24px; border: 1px solid var(--line); border-top: 3px solid var(--sueca-red); background: #f9fbfc; border-radius: 6px; overflow: hidden; }
-.bearing-part { min-width: 0; }
-.bearing-part-image { width: 100%; aspect-ratio: 1; background-image: url("assets/bearing-components.png"); background-size: 200% 200%; background-repeat: no-repeat; }
-.part-outer { background-position: left top; }
-.part-balls { background-position: right top; }
-.part-cage { background-position: left bottom; }
-.part-inner { background-position: right bottom; }
-.bearing-part-copy { position: relative; padding-top: 20px; margin-top: 16px; border-top: 1px solid var(--line); }
-.part-number { color: var(--sueca-red); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; }
-.bearing-part h4 { margin: 10px 0; font-size: 20px; line-height: 1.2; }
-.bearing-part p { margin: 0; color: var(--steel); font-size: 14px; line-height: 1.6; }
-.bearing-illustration-note { margin: 14px 0 0; color: var(--steel); font-size: 12px; }
 .back-to-top { position: fixed; z-index: 12; right: clamp(16px, 3vw, 40px); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 72px); display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 50%; color: var(--sueca-red); background: #fff; box-shadow: 0 8px 24px #0002; transition: background 180ms ease, color 180ms ease; }
 .back-to-top[hidden] { display: none; }
 .back-to-top:hover { color: #fff; background: var(--sueca-red); }
 .back-to-top svg { width: 24px; height: 24px; }
 
-@media (max-width: 980px) {
-  .bearing-parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 640px) {
-  .bearing-parts-heading { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .bearing-parts { gap: 28px 16px; padding: 16px; }
-  .bearing-part h4 { font-size: 17px; }
-  .bearing-part p { font-size: 13px; }
   .back-to-top { right: 20px; }
-}
-@media (max-width: 380px) {
-  .bearing-parts { grid-template-columns: 1fr; }
-  .bearing-part-image { max-width: 230px; margin-inline: auto; }
 }
 
 .cutaway {
@@ -721,17 +698,17 @@ p {
   background: var(--skf-blue);
 }
 
-.cutaway-image {
+.bearing-diagram {
   position: absolute;
   z-index: 1;
-  left: 50%;
-  top: 50%;
+  inset: 19% 5%;
+}
+
+.cutaway-image {
   display: block;
-  width: min(61%, 360px);
-  max-height: 88%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  transform: translate(-50%, -50%);
 }
 
 .diagram-lines {
@@ -2288,7 +2265,7 @@ summary:focus-visible {
   }
 
   .cutaway-image {
-    width: min(68%, 270px);
+    width: 100%;
   }
 
   .diagram-lines-desktop {

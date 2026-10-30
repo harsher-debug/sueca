@@ -1,3 +1,5 @@
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const menuToggle = document.querySelector(".menu-toggle");
 const siteHeader = document.querySelector(".site-header");
 const darkSections = document.querySelectorAll(".institutional, .solution-band, .site-footer");
@@ -45,98 +47,158 @@ function fallbackReveal() {
 }
 
 function initCinematicMotion() {
-  if (!window.gsap || !window.ScrollTrigger) {
+  if (!window.gsap || !window.ScrollTrigger || reduceMotion) {
     fallbackReveal();
     return;
   }
+
+  document.body.classList.add("gsap-ready");
   gsap.registerPlugin(ScrollTrigger);
-  const motion = gsap.matchMedia();
-  motion.add({
-    desktop: "(min-width: 981px)",
-    mobile: "(max-width: 980px)",
-    narrow: "(max-width: 640px)",
-    reduced: "(prefers-reduced-motion: reduce)"
-  }, (context) => {
-    if (context.conditions.reduced) {
-      fallbackReveal();
-      return;
+  gsap.defaults({ ease: "power3.out", duration: 0.8 });
+
+  const sideOffset = window.matchMedia("(max-width: 640px)").matches
+    ? 24
+    : window.matchMedia("(max-width: 980px)").matches ? 40 : 64;
+  gsap.set(".reveal", {
+    autoAlpha: 0,
+    x: (_, element) => {
+      if (element.matches(".hero-copy") || element.dataset.motion === "left") return -sideOffset;
+      if (element.matches(".hero-visual") || element.dataset.motion === "right") return sideOffset;
+      return 0;
+    },
+    y: (_, element) => element.dataset.motion || element.matches(".hero-copy, .hero-visual") ? 0 : 34
+  });
+  gsap.set(".hero-product-media", {
+    autoAlpha: 0,
+    x: 80,
+    rotation: -12,
+    scale: 0.95,
+    transformOrigin: "50% 50%"
+  });
+
+  const heroTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".hero", start: "top bottom", end: "bottom top",
+      toggleActions: "restart none restart none"
     }
-    const desktop = context.conditions.desktop;
-    // Keep the first viewport readable even before the user starts scrolling.
-    gsap.to(".hero-product-media", {
-      y: 48, rotation: 5, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
-    });
-    gsap.to(".bearing-photo", {
-      rotation: 60, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
-    });
-    gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual)").forEach((element) => {
-      const direction = element.dataset.motion === "right" ? 1 : -1;
-      gsap.fromTo(element,
-        { autoAlpha: 0, x: direction * (desktop ? 48 : 20), y: 24 },
-        { autoAlpha: 1, x: 0, y: 0, ease: "none",
-          scrollTrigger: { trigger: element, start: "top 96%", end: "top 72%", scrub: true, invalidateOnRefresh: true }
-        }
-      );
-    });
-    const guides = document.querySelector(window.matchMedia("(max-width: 640px)").matches
-      ? ".diagram-lines-mobile" : ".diagram-lines-desktop");
-    if (guides) {
-      const paths = [...guides.querySelectorAll("path")];
-      paths.forEach((path) => gsap.set(path, {
-        strokeDasharray: path.getTotalLength(), strokeDashoffset: path.getTotalLength()
-      }));
-      gsap.timeline({ scrollTrigger: {
-        trigger: ".cutaway", start: "top 70%", end: "center 48%", scrub: true
-      } })
-        .to(paths, { strokeDashoffset: 0, stagger: 0.12, ease: "none" })
-        .fromTo(guides.querySelectorAll("circle"), { autoAlpha: 0 }, { autoAlpha: 1, stagger: 0.1 }, 0.15);
-    }
-    const parts = gsap.utils.toArray(".bearing-part");
-    parts.forEach((part, index) => {
-      const image = part.querySelector(".bearing-part-image");
-      // Each texture is a separate visual layer; layout remains stable for text.
-      gsap.fromTo(image, {
-        x: () => desktop ? (1.5 - index) * part.offsetWidth * 0.72 : (index % 2 ? -22 : 22),
-        y: 32, scale: desktop ? 0.78 : 0.9
-      }, {
-        x: 0, y: 0, scale: 1, ease: "none",
-        scrollTrigger: {
-          trigger: desktop ? ".bearing-parts" : part,
-          start: "top 90%", end: "top 36%", scrub: true, invalidateOnRefresh: true
-        }
-      });
-      gsap.fromTo(part.querySelector(".bearing-part-copy"), { autoAlpha: 0, y: 20 }, {
-        autoAlpha: 1, y: 0, ease: "none",
-        scrollTrigger: { trigger: part, start: "top 76%", end: "top 44%", scrub: true }
-      });
-    });
-    gsap.utils.toArray(".float-shape").forEach((shape) => {
-      gsap.to(shape, { y: -32, rotation: 12, ease: "none",
-        scrollTrigger: { trigger: shape.closest("section"), start: "top bottom", end: "bottom top", scrub: true }
-      });
+  });
+  heroTimeline
+    .to(".hero-copy", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 })
+    .to(".hero-visual", { autoAlpha: 1, x: 0, y: 0, duration: 0.9 }, "<0.06")
+    .to(".hero-product-media", { autoAlpha: 1, x: 0, rotation: 0, scale: 1, duration: 1.4 }, "<0.12");
+
+  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual):not(.product-card)").forEach((element) => {
+    gsap.to(element, {
+      autoAlpha: 1, x: 0, y: 0,
+      scrollTrigger: {
+        trigger: element, start: "top 84%", end: "bottom top",
+        toggleActions: "restart none restart none"
+      }
     });
   });
+
+  const productTravel = window.matchMedia("(max-width: 640px)").matches ? 84 : 180;
+  gsap.utils.toArray(".product-card").forEach((card, index) => {
+    const direction = card.dataset.motion === "left" ? -1 : 1;
+    gsap.set(card, { autoAlpha: 0, x: direction * productTravel, y: 0, scale: 0.96 });
+    gsap.to(card, {
+      autoAlpha: 1,
+      x: 0,
+      scale: 1,
+      duration: 1.05,
+      delay: (index % 3) * 0.08,
+      overwrite: true,
+      scrollTrigger: {
+        trigger: card, start: "top 84%", end: "bottom top",
+        toggleActions: "restart none restart none"
+      }
+    });
+  });
+
+  const visibleGuides = document.querySelector(".diagram-lines");
+  const guidePaths = gsap.utils.toArray(visibleGuides.querySelectorAll("path"));
+  const guideDots = gsap.utils.toArray(visibleGuides.querySelectorAll("circle"));
+
+  guidePaths.forEach((path) => {
+    const length = path.getTotalLength();
+    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+  });
+  gsap.set(guideDots, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" });
+  gsap.set(".bearing-callouts .callout", { autoAlpha: 0, y: 10 });
+
+  // Move the illustration and its pointers together to preserve alignment.
+  const bearingFloat = gsap.to(".bearing-diagram", {
+    y: -8,
+    duration: 3.2,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    paused: true
+  });
+  ScrollTrigger.create({
+    trigger: ".cutaway",
+    start: "top bottom",
+    end: "bottom top",
+    onToggle: (self) => self.isActive ? bearingFloat.play() : bearingFloat.pause()
+  });
+
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: ".cutaway",
+      start: "top 72%",
+      end: "bottom top",
+      toggleActions: "restart none restart none"
+    }
+  })
+    .to(guidePaths, { strokeDashoffset: 0, duration: 0.65, stagger: 0.1, ease: "power2.out" })
+    .to(guideDots, { autoAlpha: 1, scale: 1, duration: 0.2, stagger: 0.1 }, "<0.2")
+    .to(".bearing-callouts .callout", { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.1 }, 0.2);
+
+  gsap.utils.toArray(".float-shape").forEach((shape, index) => {
+    const drift = gsap.to(shape, {
+      y: index % 2 === 0 ? -18 : 14,
+      rotation: "+=6",
+      duration: 4 + index * 0.45,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      paused: true
+    });
+
+    ScrollTrigger.create({
+      trigger: shape.closest("section"),
+      start: "top bottom",
+      end: "bottom top",
+      onEnter: () => drift.play(),
+      onLeave: () => drift.pause(),
+      onEnterBack: () => drift.play(),
+      onLeaveBack: () => drift.pause()
+    });
+  });
+
   window.addEventListener("load", () => ScrollTrigger.refresh());
   if (document.readyState === "complete") ScrollTrigger.refresh();
+  document.querySelectorAll("details").forEach((detail) => {
+    detail.addEventListener("toggle", () => ScrollTrigger.refresh());
+  });
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   document.querySelectorAll("img[loading='lazy']").forEach((image) => {
     image.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
-  });
-  // FAQ expansion changes the vertical positions of the sections below it.
-  document.querySelectorAll("details").forEach((detail) => {
-    detail.addEventListener("toggle", () => ScrollTrigger.refresh());
   });
 }
 
 try {
   initCinematicMotion();
 } catch (error) {
+  // Animation failure must never hide content or block menus and forms.
   window.ScrollTrigger?.getAll().forEach((trigger) => trigger.kill());
   window.gsap?.globalTimeline.clear();
-  document.querySelectorAll(".reveal, .hero-product-media, .bearing-photo, .diagram-lines path, .diagram-lines circle, .bearing-part-image, .bearing-part-copy, .float-shape").forEach((element) => {
-    ["opacity", "visibility", "transform", "stroke-dashoffset"].forEach((property) => element.style.removeProperty(property));
+  document.body.classList.remove("gsap-ready");
+  document.querySelectorAll(".reveal, .hero-product-media, .bearing-diagram, .bearing-callouts .callout, .diagram-lines path, .diagram-lines circle").forEach((element) => {
+    element.style.removeProperty("opacity");
+    element.style.removeProperty("visibility");
+    element.style.removeProperty("transform");
+    element.style.removeProperty("stroke-dashoffset");
   });
   fallbackReveal();
   console.warn("Animações indisponíveis; conteúdo preservado.", error);

@@ -1406,26 +1406,27 @@ p {
 
 .authenticate-visual {
   position: relative;
-  grid-column: 1 / -1;
+  grid-column: 2;
   grid-row: 1;
-  align-self: stretch;
-  min-height: 530px;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  min-height: 0;
   overflow: hidden;
   background: transparent;
 }
 
 .authenticate-visual img {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: block;
-  left: auto;
-  width: 65%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 43%;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 97%, transparent), linear-gradient(180deg, transparent, #000 8%, #000 90%, transparent);
+  width: auto;
+  max-width: 100%;
+  height: 520px;
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent), linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 97%, transparent), linear-gradient(180deg, transparent, #000 8%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent), linear-gradient(180deg, transparent, #000 3%, #000 97%, transparent);
   mask-composite: intersect;
 }
 
@@ -2072,11 +2073,11 @@ summary:focus-visible {
   .authenticate-visual {
     grid-column: 1;
     grid-row: 2;
-    min-height: 460px;
-    height: clamp(460px, 90vw, 760px);
+    min-height: 0;
+    height: auto;
   }
 
-  .authenticate-visual img { width: 100%; }
+  .authenticate-visual img { width: min(100%, 347px); height: auto; }
   .authenticate-visual::after { background: linear-gradient(180deg, rgba(235, 242, 244, 0.95), transparent 18%); }
 
   .site-header {
@@ -2212,8 +2213,8 @@ summary:focus-visible {
   }
 
   .authenticate-visual {
-    min-height: 410px;
-    height: clamp(410px, 120vw, 600px);
+    min-height: 0;
+    height: auto;
   }
 
   .site-header {

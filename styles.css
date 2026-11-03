@@ -1474,17 +1474,17 @@ p {
 
 .cmp-logos {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 180px;
-  height: 104px;
+  max-width: 100%;
+  height: 151px;
   margin: -8px 0 8px;
-  background: rgb(0, 2, 253);
 }
 
 .cert-card .cmp-mark {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   flex: 1 1 auto;
 }
@@ -1494,7 +1494,7 @@ p {
   place-items: center;
   width: 104px;
   height: 104px;
-  margin: -8px 0 8px;
+  margin: -8px 0 55px;
   border: 1px solid var(--line);
   border-radius: 12px;
   color: var(--sueca-red);
@@ -1510,11 +1510,11 @@ p {
 .cert-card .cert-authorized-logo {
   display: block;
   width: 180px;
-  height: 104px;
+  max-width: 100%;
+  height: 151px;
   margin: -8px 0 8px;
   object-fit: contain;
-  object-position: center;
-  background: rgb(0, 2, 253);
+  object-position: left top;
 }
 
 .faq-list {

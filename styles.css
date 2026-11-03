@@ -1276,9 +1276,9 @@ p {
 
 .authenticate h2 {
   max-width: 530px;
-  margin: 0 0 22px;
+  margin: 0 0 26px;
   font-size: clamp(36px, 4.2vw, 54px);
-  line-height: 0.98;
+  line-height: 1.12;
 }
 
 .authenticate h2 span {
@@ -1290,22 +1290,24 @@ p {
   letter-spacing: 0.28em;
 }
 
-.authenticate-copy > p:not(.eyebrow) {
+.authenticate-copy > p:where(:not(.eyebrow)) {
   max-width: 490px;
   margin: 0;
   color: var(--steel);
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.6;
+  text-align: left;
 }
 
 .authenticate-copy > .authenticate-app-intro {
-  margin-top: 18px;
-  margin-bottom: 6px;
+  margin-top: 20px;
+  margin-bottom: 14px;
   font-size: 16px;
 }
 
 .authenticate-app-intro strong {
   display: table;
+  margin-top: 8px;
   padding: 3px 16px;
   border-radius: 24px;
   color: #fff;
@@ -1328,7 +1330,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
 .authenticate-benefits div {
@@ -1336,7 +1338,7 @@ p {
   color: var(--graphite);
   font-size: 12px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.5;
 }
 
 .authenticate-benefits span {
@@ -1344,7 +1346,7 @@ p {
   place-items: center;
   width: 42px;
   height: 42px;
-  margin: 0 auto 8px;
+  margin: 0 auto 12px;
   border-radius: 50%;
   color: #fff;
   background: var(--sueca-red);
@@ -1371,12 +1373,12 @@ p {
 }
 
 .authenticate-copy > .authenticate-trust {
-  margin-top: 20px;
+  margin-top: 24px;
   padding: 0;
   background: transparent;
   color: var(--graphite);
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .authenticate-trust strong {
@@ -2232,7 +2234,7 @@ summary:focus-visible {
 
   .authenticate h2 {
     font-size: 34px;
-    line-height: 1.05;
+    line-height: 1.12;
     overflow-wrap: anywhere;
   }
 

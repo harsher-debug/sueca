@@ -1416,15 +1416,6 @@ p {
   background: transparent;
 }
 
-.authenticate-enlarge {
-  display: block;
-  width: fit-content;
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--graphite);
-  text-underline-offset: 4px;
-}
-
 .authenticate-visual picture {
   display: block;
   width: min(100%, 1000px);

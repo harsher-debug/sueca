@@ -1259,7 +1259,7 @@ p {
   grid-column: 1;
   grid-row: 1;
   min-width: 0;
-  max-width: 560px;
+  max-width: 460px;
   padding: 32px 32px 32px 0;
 }
 
@@ -1277,12 +1277,17 @@ p {
 .authenticate h2 {
   max-width: 530px;
   margin: 0 0 22px;
-  font-size: clamp(32px, 3.2vw, 44px);
+  font-size: clamp(36px, 4.2vw, 54px);
   line-height: 0.98;
 }
 
 .authenticate h2 span {
+  display: block;
   color: var(--sueca-red);
+}
+
+.authenticate-copy > .eyebrow {
+  letter-spacing: 0.28em;
 }
 
 .authenticate-copy > p:not(.eyebrow) {
@@ -1290,16 +1295,23 @@ p {
   margin: 0;
   color: var(--steel);
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.4;
 }
 
 .authenticate-copy > .authenticate-app-intro {
-  margin-top: 8px;
+  margin-top: 18px;
+  margin-bottom: 6px;
   font-size: 16px;
 }
 
 .authenticate-app-intro strong {
-  color: var(--sueca-red);
+  display: table;
+  padding: 3px 16px;
+  border-radius: 24px;
+  color: #fff;
+  background: var(--sueca-red);
+  font-size: 22px;
+  line-height: 1.2;
 }
 
 .authenticate-note {
@@ -1320,6 +1332,7 @@ p {
 }
 
 .authenticate-benefits div {
+  text-align: center;
   color: var(--graphite);
   font-size: 12px;
   font-weight: 700;
@@ -1331,7 +1344,7 @@ p {
   place-items: center;
   width: 42px;
   height: 42px;
-  margin-bottom: 7px;
+  margin: 0 auto 8px;
   border-radius: 50%;
   color: #fff;
   background: var(--sueca-red);
@@ -1345,6 +1358,16 @@ p {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.authenticate-benefits div + div {
+  border-left: 1px solid rgba(97, 96, 98, 0.18);
+}
+
+.store-icon {
+  width: 24px;
+  height: 26px;
+  flex: 0 0 24px;
 }
 
 .authenticate-copy > .authenticate-trust {

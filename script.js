@@ -165,50 +165,126 @@ backToTop.addEventListener("click", (event) => {
 });
 
 const productDetails = {
-  rolamentos: {
-    title: "Rolamentos",
-    description: "A linha SKF reúne diferentes geometrias para apoiar eixos em movimento. A seleção considera carga, rotação, temperatura, lubrificação e condições do ambiente.",
-    applications: "Motores, redutores, bombas, transportadores e equipamentos agrícolas, conforme o dimensionamento de cada conjunto."
+  "rolamentos": {
+    "title": "Rolamentos",
+    "description": "Os rolamentos SKF reúnem diferentes geometrias para diversas aplicações industriais e agrícolas, oferecendo soluções para variadas condições de operação. Para a escolha adequada, é importante considerar fatores como carga, rotação, temperatura, lubrificação e condições do ambiente.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Rolamentos rígidos de esferas",
+      "Rolamentos série Y",
+      "Rolamentos de esferas de contato angular",
+      "Rolamentos autocompensadores de esferas",
+      "Rolamentos axiais de esferas",
+      "Rolamentos de rolos cilíndricos",
+      "Rolamentos de rolos cônicos",
+      "Rolamentos autocompensadores de rolos",
+      "Rolamentos de rolos bipartidos SKF Cooper",
+      "Rolamentos de rolos toroidais CARB",
+      "Rolamentos axiais de rolos cilíndricos",
+      "Rolamentos axiais de rolos de agulhas",
+      "Rolamentos axiais de rolos cônicos",
+      "Rolamentos axiais autocompensadores de rolos"
+    ]
   },
-  mancais: {
-    title: "Mancais",
-    description: "Os mancais alojam e apoiam o rolamento, ajudando a manter o eixo posicionado e facilitando a instalação e a manutenção do conjunto.",
-    applications: "Eixos de transportadores, ventiladores, linhas de produção e máquinas agrícolas."
+  "mancais": {
+    "title": "Mancais",
+    "description": "Os mancais SKF são desenvolvidos para alojar e apoiar rolamentos, proporcionando estabilidade, posicionamento adequado do eixo e segurança na operação. Suas diferentes configurações facilitam a montagem, a inspeção e a manutenção, atendendo às necessidades de diversas aplicações industriais.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Mancais SNL 2, 3, 5 e 6",
+      "Mancais SNLN 30",
+      "Mancais SNL 30, 31 e 32",
+      "Mancais SONL",
+      "Mancais SAF e SAW",
+      "Mancais FNL",
+      "Mancais PD"
+    ]
   },
-  vedacoes: {
-    title: "Vedações",
-    description: "Vedações ajudam a reter o lubrificante e a limitar a entrada de água, poeira e outras partículas. Perfil e material devem acompanhar as condições de trabalho.",
-    applications: "Conjuntos rotativos expostos a contaminantes, umidade ou exigências específicas de vedação."
+  "vedacoes": {
+    "title": "Vedações",
+    "description": "As vedações SKF são desenvolvidas para proteger componentes mecânicos contra a entrada de contaminantes, como poeira, água e partículas abrasivas, além de ajudar a evitar vazamentos de lubrificantes. Suas diferentes configurações contribuem para reduzir o desgaste, aumentar a vida útil dos equipamentos e garantir maior confiabilidade em aplicações industriais e agrícolas.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Vedações radiais de eixo",
+      "Vedações tipo cassete",
+      "Buchas de desgaste"
+    ]
   },
-  lubrificacao: {
-    title: "Lubrificação SKF SYSTEM 24",
-    description: "Lubrificadores automáticos de ponto único entregam pequenas quantidades de graxa ou óleo de modo regular, reduzindo a dependência da aplicação manual.",
-    applications: "Pontos de lubrificação em motores, bombas, ventiladores, transportadores e mancais."
+  "lubrificacao": {
+    "title": "Lubrificação",
+    "description": "As soluções de lubrificação SKF são desenvolvidas para garantir o fornecimento adequado de lubrificante aos componentes mecânicos, contribuindo para reduzir o atrito, prevenir desgastes e aumentar a vida útil dos equipamentos. Com opções para lubrificação manual e automática, proporcionam maior eficiência, confiabilidade e segurança nas operações industriais e agrícolas.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Ferramentas para lubrificação manual",
+      "Lubrificadores automáticos",
+      "Componentes para sistemas de lubrificação"
+    ]
   },
-  graxas: {
-    title: "Graxas SKF",
-    description: "A graxa correta depende da velocidade, carga, temperatura e exposição do equipamento. A escolha do produto e do intervalo de relubrificação caminham juntas.",
-    applications: "Rolamentos industriais e agrícolas sujeitos a diferentes condições de operação."
+  "graxas": {
+    "title": "Graxas",
+    "description": "As graxas SKF são desenvolvidas para oferecer lubrificação eficiente em diferentes condições de operação, contribuindo para reduzir o atrito, proteger contra o desgaste e aumentar a vida útil dos componentes. Com opções para diferentes temperaturas, cargas e ambientes, proporcionam maior confiabilidade e desempenho em aplicações industriais e agrícolas.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Graxas para ampla variedade de aplicações",
+      "Graxas para baixas temperaturas",
+      "Graxas para cargas elevadas",
+      "Graxas para altas temperaturas",
+      "Graxas compatíveis com aplicações alimentícias",
+      "Graxas para aplicações especiais"
+    ]
   },
-  mapro: {
-    title: "Ferramentas MAPRO",
-    description: "Ferramentas de manutenção SKF apoiam montagem, desmontagem, alinhamento e lubrificação com procedimentos mais controlados.",
-    applications: "Oficinas de manutenção e equipes que instalam ou substituem rolamentos e componentes associados."
+  "mapro": {
+    "title": "Ferramentas de Manutenção SKF (MaPro)",
+    "description": "As ferramentas de manutenção SKF (MaPro) são desenvolvidas para proporcionar maior precisão, segurança e eficiência na montagem, desmontagem e manutenção de rolamentos e componentes mecânicos. Com soluções mecânicas, hidráulicas e térmicas, ajudam a prevenir danos durante a instalação, reduzir o tempo de manutenção e aumentar a confiabilidade dos equipamentos.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Ferramentas hidráulicas para montagem e desmontagem",
+      "Ferramentas mecânicas para montagem e desmontagem",
+      "Aquecedores para montagem e desmontagem",
+      "Ferramentas de alinhamento"
+    ]
   },
   "solid-oil": {
-    title: "Rolamentos Solid Oil",
-    description: "O Solid Oil incorpora lubrificante em uma matriz polimérica dentro do rolamento. É uma alternativa para aplicações em que água e contaminantes desafiam a lubrificação convencional.",
-    applications: "Ambientes úmidos ou sujeitos à contaminação, após avaliação das condições da aplicação."
+    "title": "Rolamentos Solid Oil SKF",
+    "description": "Os rolamentos SKF com tecnologia Solid Oil oferecem uma solução inovadora de lubrificação, utilizando uma matriz polimérica saturada de óleo que proporciona lubrificação contínua durante a operação. Desenvolvidos especialmente para ambientes com umidade e contaminação, ajudam a reduzir vazamentos de lubrificante, dispensam a relubrificação e contribuem para aumentar a vida útil e a confiabilidade dos equipamentos.",
+    "listTitle": "Principais benefícios:",
+    "items": [
+      "Lubrificação contínua, sem necessidade de relubrificação",
+      "Maior resistência à umidade e à lavagem",
+      "Redução de vazamentos de lubrificante",
+      "Proteção adicional contra a entrada de contaminantes",
+      "Menor necessidade de intervenções de manutenção",
+      "Maior confiabilidade em condições severas de operação"
+    ]
   },
-  correntes: {
-    title: "Correntes SKF",
-    description: "Correntes transmitem movimento e potência entre rodas dentadas. Dimensionamento, lubrificação e ambiente de operação orientam a seleção.",
-    applications: "Sistemas de transmissão e transporte em máquinas industriais e agrícolas."
+  "correntes": {
+    "title": "Correntes SKF",
+    "description": "As correntes SKF são desenvolvidas para oferecer resistência, durabilidade e eficiência na transmissão de potência e movimentação de materiais. Com diferentes configurações para aplicações industriais e agrícolas, contribuem para reduzir desgastes, suportar condições exigentes de operação e aumentar a confiabilidade e a produtividade dos equipamentos.",
+    "listTitle": "Linhas disponíveis:",
+    "items": [
+      "Correntes de rolos",
+      "Correntes de rolos duplas e triplas",
+      "Correntes de passo duplo",
+      "Correntes transportadoras",
+      "Correntes de alta resistência",
+      "Correntes resistentes à corrosão",
+      "Correntes de placas (Leaf Chains)",
+      "Correntes agrícolas",
+      "Correntes para aplicações especiais"
+    ]
   },
-  sensorizadas: {
-    title: "Unidades sensorizadas",
-    description: "Unidades com sensores integram apoio mecânico e coleta de sinais da operação. A configuração depende do equipamento e dos dados que precisam ser acompanhados.",
-    applications: "Conjuntos que exigem informação integrada para controle ou monitoramento."
+  "sensorizadas": {
+    "title": "Unidades Sensorizadas SKF",
+    "description": "Os rolamentos sensorizados SKF combinam a precisão dos rolamentos com tecnologias de sensores integrados, permitindo acompanhar parâmetros como velocidade, sentido de rotação e, em determinadas configurações, temperatura e condições de funcionamento. Essas soluções contribuem para maior controle operacional, eficiência dos equipamentos e confiabilidade dos processos industriais.",
+    "listTitle": "Principais benefícios:",
+    "items": [
+      "Integração de sensores ao conjunto do rolamento",
+      "Monitoramento de parâmetros operacionais",
+      "Medição de velocidade e sentido de rotação",
+      "Possibilidade de acompanhamento da temperatura",
+      "Maior precisão no controle de máquinas e equipamentos",
+      "Apoio à manutenção preventiva e preditiva"
+    ]
   }
 };
 
@@ -225,8 +301,15 @@ document.querySelectorAll(".product-card").forEach((card) => {
     dialogImage.alt = cardImage.alt;
     productDialog.querySelector("#product-dialog-title").textContent = detail.title;
     productDialog.querySelector("#product-dialog-description").textContent = detail.description;
-    productDialog.querySelector("#product-dialog-applications").textContent = detail.applications;
+    productDialog.querySelector("#product-dialog-list-title").textContent = detail.listTitle;
+    const items = detail.items.map((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      return item;
+    });
+    productDialog.querySelector("#product-dialog-items").replaceChildren(...items);
     productDialog.showModal();
+    productDialog.querySelector(".product-dialog-copy").scrollTop = 0;
   });
 });
 productDialog.querySelector(".product-dialog-close").addEventListener("click", () => productDialog.close());

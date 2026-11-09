@@ -13,6 +13,8 @@
 
 ## Generated illustrative images
 
+- `skf-mapro-clean.png`: Edited from `skf-mapro-blue.jpg` with the built-in image generation tool for the second LP review. Prompt: "Edit this exact product photograph. Remove ONLY the dark grey caption 'TMFT 36' in the upper left white margin, replacing that text with pure white matching the background. Preserve the blue tool case, every tool, geometry, foam, lighting, scale, composition and all details of the photographed product unchanged. Do not redesign the product or add anything. Plain white background, same framing."
+
 - `skf-authenticate-industrial.png`: Generated editorial illustration of a hand holding a phone in an industrial setting, using the user-provided SKF Authenticate screen as a visual reference.
 - `skf-authenticate-industrial-wide.png`: Wider generated adaptation of the Authenticate image, extending the industrial environment for the landing page panel.
 - `skf-authorized-distributor.png`: Generated with the built-in image generation tool from the user-provided SKF Distribuidor Autorizado mark. Square cobalt-blue field with a white SKF logotype and the Portuguese wording ?DISTRIBUIDOR AUTORIZADO?. Used in the authorized distributor certification card.

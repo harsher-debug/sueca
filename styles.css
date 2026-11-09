@@ -496,6 +496,7 @@ h1 {
 
 .hero-flow {
   position: absolute;
+  z-index: 0;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -676,7 +677,7 @@ p {
   overflow: hidden;
   padding: 20px 24px;
   background: transparent;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   color: var(--ink);
 }
 
@@ -698,6 +699,9 @@ p {
   height: auto;
   margin-left: clamp(70px, 8vw, 110px);
   flex-shrink: 0;
+  /* Keep the metal opaque over the flow line, with only the bore and exterior transparent. */
+  -webkit-mask-image: radial-gradient(circle closest-side, transparent 29.35%, #000 29.45%, #000 67.25%, transparent 67.45%);
+  mask-image: radial-gradient(circle closest-side, transparent 29.35%, #000 29.45%, #000 67.25%, transparent 67.45%);
   animation: bearingTurn 28s linear infinite;
 }
 

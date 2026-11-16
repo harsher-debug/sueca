@@ -13,6 +13,12 @@
 
 ## Generated illustrative images
 
+- `application-industrial-technician.png`: Edited with the built-in image generation tool for the November 16 video review. Illustrative scene, not a photograph of a Sueca employee. Final prompt: "Edit this industrial photograph for a website. Replace the male maintenance worker with an adult female maintenance technician, brown hair tied back securely, safety glasses, dark charcoal industrial coveralls with reflective strips, black work gloves, inspecting the same realistic ball bearing in her hands. Preserve the workshop, electric motor, lighting, photo realism, framing and all other objects. The woman's head must occupy approximately the same location and size as the original head (center x 49%, y 14%), so she fits the existing layout. No text or logos, no graphic effects. Keep 4:3 landscape framing."
+
+- `sueca-wave.svg`: Code-native vector inspired by the multi-line grey/red wave reference supplied by Sueca on November 16, 2026.
+- `sueca-presence.svg`: Derived from the existing `brasil-ufs.svg`, highlighting RS, PR, SP, MT and GO to match the existing branch information.
+- `fonts/Montserrat-{400,500,600,700}.woff2`: Montserrat from Google Fonts (https://fonts.google.com/specimen/Montserrat), downloaded from Google's font CDN and compressed to WOFF2 locally. SIL Open Font License in `fonts/Montserrat-OFL.txt`.
+
 - `skf-mapro-clean.png`: Edited from `skf-mapro-blue.jpg` with the built-in image generation tool for the second LP review. Prompt: "Edit this exact product photograph. Remove ONLY the dark grey caption 'TMFT 36' in the upper left white margin, replacing that text with pure white matching the background. Preserve the blue tool case, every tool, geometry, foam, lighting, scale, composition and all details of the photographed product unchanged. Do not redesign the product or add anything. Plain white background, same framing."
 
 - `skf-authenticate-industrial.png`: Generated editorial illustration of a hand holding a phone in an industrial setting, using the user-provided SKF Authenticate screen as a visual reference.

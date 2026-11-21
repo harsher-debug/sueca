@@ -11,6 +11,12 @@
 - `skf-solid-oil-sueca.png`: SKF Solid Oil bearing photo, https://www.sueca.com.br/rolamentos-com-solid-oil
 - `whatsapp.svg`: WhatsApp mark from Simple Icons, https://simpleicons.org/icons/whatsapp
 
+## Delivery optimization — November 20, 2026
+
+`optimized/*.webp` are encoded from the existing artwork by `scripts/optimize-assets.py`; the originals are retained. No new scene content was generated in this pass. The phone/app image uses lossless encoding with unchanged dimensions and was checked pixel for pixel. Other images use quality 90–94; only the oversized chain photo is resized to a maximum of 1280 pixels. The 14 processed images total 3.02 MiB instead of 12.44 MiB (75.7% reduction).
+
+Visual reference: https://sueca.aprovabox.com.br/ (reviewed November 20, 2026). Used for Sueca red/grey colors, navigation feedback, card interactions and entrance motion. Typography follows the explicit Montserrat request in the supplied video.
+
 ## Generated illustrative images
 
 - `application-industrial-technician.png`: Edited with the built-in image generation tool for the November 16 video review. Illustrative scene, not a photograph of a Sueca employee. Final prompt: "Edit this industrial photograph for a website. Replace the male maintenance worker with an adult female maintenance technician, brown hair tied back securely, safety glasses, dark charcoal industrial coveralls with reflective strips, black work gloves, inspecting the same realistic ball bearing in her hands. Preserve the workshop, electric motor, lighting, photo realism, framing and all other objects. The woman's head must occupy approximately the same location and size as the original head (center x 49%, y 14%), so she fits the existing layout. No text or logos, no graphic effects. Keep 4:3 landscape framing."

@@ -1,4 +1,5 @@
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+let reduceMotion = motionPreference.matches;
 
 const menuToggle = document.querySelector(".menu-toggle");
 const siteHeader = document.querySelector(".site-header");
@@ -11,9 +12,21 @@ const syncHeader = () => {
   });
   siteHeader.classList.toggle("is-dark", isDark);
   siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
+  const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollRange > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollRange)) : 0;
+  siteHeader.style.setProperty("--page-progress", progress);
 };
-window.addEventListener("scroll", syncHeader, { passive: true });
-window.addEventListener("resize", syncHeader);
+let scrollFrame = 0;
+function queueScrollSync() {
+  if (scrollFrame) return;
+  scrollFrame = window.requestAnimationFrame(() => {
+    scrollFrame = 0;
+    syncHeader();
+    syncBackToTop();
+  });
+}
+window.addEventListener("scroll", queueScrollSync, { passive: true });
+window.addEventListener("resize", queueScrollSync);
 syncHeader();
 
 function closeMenu() {
@@ -46,6 +59,8 @@ function fallbackReveal() {
   document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
 }
 
+const motionCleanups = [];
+
 // Re-arm entrances only after the block leaves the viewport completely.
 function observeMotion(entries, options = { threshold: 0 }) {
   const states = new Map(entries.map((entry) => [entry.element, { ...entry, visible: false }]));
@@ -55,7 +70,7 @@ function observeMotion(entries, options = { threshold: 0 }) {
       const visible = change.isIntersecting;
       if (!state || state.visible === visible) return;
       state.visible = visible;
-      if (visible) {
+      if (visible && !document.hidden) {
         state.entrance?.restart(true);
         state.loop?.play();
       } else {
@@ -65,7 +80,49 @@ function observeMotion(entries, options = { threshold: 0 }) {
     });
   }, options);
   states.forEach((_, element) => observer.observe(element));
+  const onVisibility = () => states.forEach((state) => {
+    if (document.hidden) {
+      state.entrance?.pause();
+      state.loop?.pause();
+    } else if (state.visible) {
+      state.entrance?.play();
+      state.loop?.play();
+    }
+  });
+  // Keyboard navigation must not land on content still waiting for its entrance.
+  const onFocus = (event) => states.forEach((state) => {
+    if (state.element.contains(event.target)) state.entrance?.progress(1);
+  });
+  document.addEventListener("visibilitychange", onVisibility);
+  document.addEventListener("focusin", onFocus);
+  motionCleanups.push(() => {
+    observer.disconnect();
+    document.removeEventListener("visibilitychange", onVisibility);
+    document.removeEventListener("focusin", onFocus);
+  });
   return observer;
+}
+
+function initScrollEffects() {
+  if (!window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  const responsiveMotion = gsap.matchMedia();
+  responsiveMotion.add({ desktop: "(min-width: 981px)", mobile: "(max-width: 980px)" }, (context) => {
+    const distance = context.conditions.desktop ? 70 : 28;
+    [
+      [".hero-flow", ".hero", distance, -distance, "top top"],
+      [".contact-flow", ".final-cta", distance, -distance, "top bottom"],
+      [".cutaway", ".skf-force", 30, -18, "top 85%"],
+      [".authenticate-visual picture", ".authenticate", 18, -18, "top bottom"]
+    ].forEach(([target, trigger, from, to, start]) => {
+      gsap.fromTo(target, { y: from }, {
+        y: to,
+        ease: "none",
+        scrollTrigger: { trigger, start, end: "bottom top", scrub: 0.8, invalidateOnRefresh: true }
+      });
+    });
+  });
+  motionCleanups.push(() => responsiveMotion.revert());
 }
 
 function initCinematicMotion() {
@@ -82,17 +139,21 @@ function initCinematicMotion() {
   const heroTimeline = gsap.timeline({ paused: true })
     .fromTo(".hero-copy", { autoAlpha: 0, x: -sideOffset }, { autoAlpha: 1, x: 0, duration: 0.9 })
     .fromTo(".hero-visual", { autoAlpha: 0, x: sideOffset }, { autoAlpha: 1, x: 0, duration: 0.9 }, 0.06)
+    .fromTo(".hero-benefits li", { autoAlpha: 0, y: 24 },
+      { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.7 }, 0.3)
     .fromTo(".hero-product-media", { autoAlpha: 0, x: 80, rotation: -12, scale: 0.95 },
       { autoAlpha: 1, x: 0, rotation: 0, scale: 1, duration: 1.4 }, 0.18);
   entries.push({ element: hero, entrance: heroTimeline });
 
-  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual)").forEach((element) => {
-    const product = element.matches(".product-card");
+  gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual):not(.cutaway)").forEach((element) => {
+    const card = element.matches(".product-card, .cert-card");
+    const heading = element.matches(".section-heading, .section-copy");
     const direction = element.dataset.motion === "right" ? 1 : -1;
-    const travel = product ? (smallScreen ? 84 : 180) : sideOffset;
+    const siblings = card ? Array.from(element.parentElement.children) : [];
+    const column = card ? siblings.indexOf(element) % (smallScreen ? 1 : 3) : 0;
     const entrance = gsap.fromTo(element,
-      { autoAlpha: 0, x: direction * travel, scale: product ? 0.96 : 1 },
-      { autoAlpha: 1, x: 0, scale: 1, duration: product ? 1.05 : 0.8, paused: true }
+      { autoAlpha: 0, x: card || heading ? 0 : direction * sideOffset, y: card ? 56 : 28, scale: card ? 0.96 : 1 },
+      { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.85, delay: column * 0.1, paused: true }
     );
     entries.push({ element, entrance });
   });
@@ -117,10 +178,6 @@ function initCinematicMotion() {
     });
     calloutEntries.push({ element: callout, entrance });
   });
-  const cutawayEntry = entries.find((entry) => entry.element === cutaway);
-  cutawayEntry.loop = gsap.to(".bearing-diagram", {
-    y: -8, duration: 3.2, ease: "sine.inOut", repeat: -1, yoyo: true, paused: true
-  });
   // Pause decorative motion outside the viewport.
   gsap.utils.toArray(".float-shape").forEach((shape, index) => {
     entries.push({ element: shape, loop: gsap.to(shape, {
@@ -130,30 +187,52 @@ function initCinematicMotion() {
   });
   observeMotion(entries);
   observeMotion(calloutEntries, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
+  initScrollEffects();
 }
 
-try {
-  initCinematicMotion();
-} catch (error) {
-  // Animation failure must never hide content or block menus and forms.
-  window.ScrollTrigger?.getAll().forEach((trigger) => trigger.kill());
-  window.gsap?.globalTimeline.clear();
+let motionContext;
+function startMotion() {
+  motionCleanups.splice(0).forEach((cleanup) => cleanup());
+  motionContext?.revert();
   document.body.classList.remove("gsap-ready");
-  document.querySelectorAll(".reveal, .hero-product-media, .bearing-diagram, .bearing-callouts .callout, .diagram-lines path, .diagram-lines circle").forEach((element) => {
-    element.style.removeProperty("opacity");
-    element.style.removeProperty("visibility");
-    element.style.removeProperty("transform");
-    element.style.removeProperty("stroke-dashoffset");
-  });
-  fallbackReveal();
-  console.warn("Animações indisponíveis; conteúdo preservado.", error);
+  try {
+    if (!window.gsap || reduceMotion) {
+      fallbackReveal();
+      return;
+    }
+    motionContext = gsap.context(() => {}, document.body);
+    motionContext.add(initCinematicMotion);
+  } catch (error) {
+    // Animation failure must never hide content or block menus and forms.
+    motionCleanups.splice(0).forEach((cleanup) => cleanup());
+    motionContext?.revert();
+    document.body.classList.remove("gsap-ready");
+    fallbackReveal();
+    console.warn("Animações indisponíveis; conteúdo preservado.", error);
+  }
 }
+startMotion();
+motionPreference.addEventListener("change", (event) => {
+  reduceMotion = event.matches;
+  startMotion();
+});
+
+// Keep the hero rotating while visible; avoid spending frames on an offscreen bearing.
+const heroSection = document.querySelector(".hero");
+if ("IntersectionObserver" in window) {
+  const heroVisibility = new IntersectionObserver(([entry]) => {
+    heroSection.classList.toggle("is-offscreen", !entry.isIntersecting);
+  });
+  heroVisibility.observe(heroSection);
+}
+const syncPageVisibility = () => document.body.classList.toggle("motion-suspended", document.hidden);
+document.addEventListener("visibilitychange", syncPageVisibility);
+syncPageVisibility();
 
 const backToTop = document.querySelector(".back-to-top");
 function syncBackToTop() {
   backToTop.hidden = window.scrollY < 480;
 }
-window.addEventListener("scroll", syncBackToTop, { passive: true });
 syncBackToTop();
 backToTop.addEventListener("click", (event) => {
   event.preventDefault();

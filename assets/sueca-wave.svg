@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 529 243" preserveAspectRatio="none" fill="none">
   <defs><linearGradient id="wave" x1="7" y1="100" x2="527" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#616062"/><stop offset="0.35" stop-color="#9e5153"/><stop offset="1" stop-color="#B5181A"/></linearGradient></defs>
-  <g stroke="url(#wave)" stroke-width="0.65" stroke-linecap="round">
+  <g stroke="url(#wave)" stroke-width="0.8" stroke-linecap="round">
     <path d="M7 60 C28 50 42 10 72 37 S90 95 145 86 C185 89 190 56 250 78 S355 145 425 128 S480 78 527 78"/>
     <path d="M7 66 C28 55 42 15 72 42 S90 99 145 93 C185 102 188.5 57.2 250 83 S355 150 425 132 S480 81 527 81"/>
     <path d="M7 72 C28 60 42 20 72 47 S90 103 145 100 C185 115 187 58.4 250 88 S355 155 425 136 S480 84 527 84"/>

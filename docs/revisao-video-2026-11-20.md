@@ -20,7 +20,7 @@ Referência: `WhatsApp Video 2026-11-16 at 09.50.53.mp4` (3min28s), imagem de on
 ## Complementos solicitados por escrito
 
 - Ordem: institucional → portfólio → espaço Service → precisão SKF → segmentos → certificações → aplicativo → contato → FAQ.
-- O espaço Service permanece reservado, sem descrição de serviços não fornecidos.
+- O espaço Service, inicialmente reservado, foi preenchido na revisão seguinte com os textos e os quatro serviços fornecidos na imagem pelo cliente.
 - Destaque do aplicativo: “Proteja-se contra falsificações.”
 - Identificação da seção: “Aplicativo SKF Authenticate”.
 - “Onde a SKF atua” substituído por “Segmentos”.

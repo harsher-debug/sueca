@@ -1,5 +1,7 @@
 # Asset sources
 
+- `service-maintenance.jpg`: Service banner from the Sueca reference site supplied by the user: https://sueca.aprovabox.com.br/static/version1793982900/frontend/Sueca/storefront/pt_BR/images/banner-servicos-final.jpg. Used as a softly faded decorative background behind the Service content supplied in the screenshot.
+
 - `sueca-logo-original.png`: Original Sueca logo supplied by the user, including its metallic spheres.
 - `sueca-logo-original-dark.svg`: Dark-background version of that same image, with white lettering and the original red accent and metallic spheres.
 - `skf-logo-white.svg`: official white SKF wordmark, https://www.skf.com/v2/assets/img/Skf_logo_white.svg

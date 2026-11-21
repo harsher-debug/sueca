@@ -146,11 +146,13 @@ function initCinematicMotion() {
   entries.push({ element: hero, entrance: heroTimeline });
 
   gsap.utils.toArray(".reveal:not(.hero-copy):not(.hero-visual):not(.cutaway)").forEach((element) => {
-    const card = element.matches(".product-card, .cert-card");
+    const card = element.matches(".product-card, .cert-card, .service-card");
     const heading = element.matches(".section-heading, .section-copy");
     const direction = element.dataset.motion === "right" ? 1 : -1;
     const siblings = card ? Array.from(element.parentElement.children) : [];
-    const column = card ? siblings.indexOf(element) % (smallScreen ? 1 : 3) : 0;
+    const twoColumns = element.parentElement.matches(".service-grid") || window.matchMedia("(max-width: 980px)").matches;
+    const columns = smallScreen ? 1 : twoColumns ? 2 : 3;
+    const column = card ? siblings.indexOf(element) % columns : 0;
     const entrance = gsap.fromTo(element,
       { autoAlpha: 0, x: card || heading ? 0 : direction * sideOffset, y: card ? 56 : 28, scale: card ? 0.96 : 1 },
       { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.85, delay: column * 0.1, paused: true }

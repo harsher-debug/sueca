@@ -3028,18 +3028,32 @@ summary:focus-visible {
 .authenticate {
   width: 100%;
   margin: 28px 0;
-  padding: 56px max(24px, calc((100% - 1180px) / 2));
+  padding: 48px max(24px, calc((100% - 1280px) / 2));
+  min-height: 760px;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   background: #eef1f3;
 }
-.authenticate-copy { max-width: 540px; padding: 0 24px 0 0; }
+.authenticate-copy { width: 100%; max-width: 540px; padding: 0 24px 0 0; }
 .authenticate h2 { font-size: clamp(30px, 2.7vw, 40px); }
 .authenticate-copy > p:where(:not(.eyebrow)) { font-size: 16px; line-height: 1.75; }
 .authenticate-copy > .authenticate-app-intro { margin-block: 18px; }
-.authenticate-visual { position: absolute; inset: 0 0 0 auto; width: 78%; display: block; z-index: 0; }
+.authenticate-visual {
+  position: absolute;
+  /* Clear grid placement so the section, not a grid track, bounds the image. */
+  grid-column: auto;
+  grid-row: auto;
+  inset: 50% max(24px, calc((100% - 1280px) / 2)) auto auto;
+  translate: 0 -50%;
+  width: min(73%, 1020px);
+  aspect-ratio: 3 / 2;
+  display: block;
+  z-index: 0;
+  border-radius: clamp(18px, 2.2vw, 32px);
+  overflow: hidden;
+}
 .authenticate-visual picture { width: 100%; height: 100%; }
 .authenticate-visual img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  width: 100%; height: 100%; object-fit: contain; object-position: center;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%);
   mask-image: linear-gradient(90deg, transparent, #000 35%);
 }
@@ -3047,25 +3061,28 @@ summary:focus-visible {
 .authenticate-actions { margin-top: 24px; }
 @media (max-width: 1100px) and (min-width: 981px) {
   .institutional-inner { grid-template-columns: minmax(0, 1fr) 310px; gap: 28px; }
-  .authenticate-copy { padding-right: 18px; }
-  .authenticate-visual img { object-position: 57% center; }
 }
 @media (max-width: 980px) {
   .institutional-inner { grid-template-columns: 1fr; }
   .institutional-presence { display: block; width: min(100%, 380px); max-width: none; margin-inline: auto; }
   .institutional-presence img { width: 100%; height: auto; }
-  .authenticate { grid-template-columns: 1fr; padding: 36px 24px 0; }
-  .authenticate-copy { max-width: 680px; margin-inline: auto; padding: 0; }
-  .authenticate-visual { position: relative; inset: auto; grid-row: 2; width: calc(100% + 48px); margin: 24px -24px 0; }
-  .authenticate-visual picture { width: 100%; height: auto; }
-  .authenticate-visual img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%); mask-image: linear-gradient(180deg, transparent, #000 12%); }
+}
+@media (max-width: 1100px) {
+  .authenticate { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 36px 24px; gap: 28px; }
+  .authenticate-copy { max-width: 720px; margin-inline: auto; padding: 0; }
+  .authenticate-visual { position: relative; inset: auto; translate: none; grid-column: 1; grid-row: 2; width: min(100%, 900px); margin: 0 auto; }
+  .authenticate-visual img { aspect-ratio: auto; -webkit-mask-image: linear-gradient(180deg, transparent, #000 10%); mask-image: linear-gradient(180deg, transparent, #000 10%); }
 }
 @media (max-width: 640px) {
   .hero-benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .hero-benefits li { padding-right: 0; }
   .institutional-presence { padding: 22px; }
   .applications::before { height: 120px; top: -30px; }
-  .authenticate-benefits div { font-size: 12px; }
+  .authenticate { padding: 28px 18px; gap: 20px; }
+  .authenticate h2 { font-size: clamp(28px, 7vw, 34px); }
+  .authenticate-benefits div { font-size: 13px; line-height: 1.5; }
+  .authenticate-visual { aspect-ratio: 1; }
+  .authenticate-visual img { object-fit: cover; object-position: 72% center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .institutional-cta:hover, .service-link:hover, .portfolio-inquiry .button:hover { transform: none; }

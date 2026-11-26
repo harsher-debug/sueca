@@ -628,15 +628,24 @@ function initBranchLocator() {
 
 initBranchLocator();
 
+// Keep attribution when anchor links navigate from the canonical entry URL.
+document.querySelectorAll('a[href^="/skf#"]').forEach((link) => {
+  link.setAttribute("href", `/skf${window.location.search}${link.hash}`);
+});
+
 document.querySelector(".lead-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
+  const campaign = new URLSearchParams(window.location.search);
+  const attribution = [...campaign].filter(([key]) => /^utm_(source|medium|campaign|term|content|id)$/.test(key))
+    .map(([key, value]) => `${key}: ${value.slice(0, 250)}`);
   const message = [
     "Olá, quero orientação sobre produtos SKF.",
     `Nome: ${data.get("nome")}`,
     `WhatsApp: ${data.get("telefone")}`,
     `Aplicação: ${data.get("aplicacao")}`,
-    `Necessidade: ${data.get("mensagem") || "Não informada"}`
+    `Necessidade: ${data.get("mensagem") || "Não informada"}`,
+    ...attribution
   ].join("\n");
 
   window.open(`https://wa.me/${branches[selectedBranch].whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");

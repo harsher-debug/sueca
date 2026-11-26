@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="540 0 256 256">
+  <title>Sueca</title>
+  <defs>
+    <g id="steel-ball">
+      <circle cx="-0.0" cy="-0.0" r="17.0" fill="#858586" />
+      <circle cx="-0.17" cy="-0.21" r="16.38" fill="#979798" />
+      <circle cx="-0.33" cy="-0.42" r="15.75" fill="#a0a0a1" />
+      <circle cx="-0.5" cy="-0.62" r="15.12" fill="#a8a8a9" />
+      <circle cx="-0.67" cy="-0.83" r="14.5" fill="#afafb0" />
+      <circle cx="-0.83" cy="-1.04" r="13.88" fill="#b5b5b6" />
+      <circle cx="-1.0" cy="-1.25" r="13.25" fill="#bababb" />
+      <circle cx="-1.17" cy="-1.46" r="12.62" fill="#bfbfc0" />
+      <circle cx="-1.33" cy="-1.67" r="12.0" fill="#c4c4c5" />
+      <circle cx="-1.5" cy="-1.88" r="11.38" fill="#c9c9ca" />
+      <circle cx="-1.67" cy="-2.08" r="10.75" fill="#cdcdce" />
+      <circle cx="-1.83" cy="-2.29" r="10.12" fill="#d1d1d2" />
+      <circle cx="-2.0" cy="-2.5" r="9.5" fill="#d5d5d6" />
+      <circle cx="-2.17" cy="-2.71" r="8.88" fill="#d9d9da" />
+      <circle cx="-2.33" cy="-2.92" r="8.25" fill="#ddddde" />
+      <circle cx="-2.5" cy="-3.12" r="7.62" fill="#e1e1e2" />
+      <circle cx="-2.67" cy="-3.33" r="7.0" fill="#e5e5e6" />
+      <circle cx="-2.83" cy="-3.54" r="6.38" fill="#e8e8e9" />
+      <circle cx="-3.0" cy="-3.75" r="5.75" fill="#ececed" />
+      <circle cx="-3.17" cy="-3.96" r="5.12" fill="#efeff0" />
+      <circle cx="-3.33" cy="-4.17" r="4.5" fill="#f2f2f3" />
+      <circle cx="-3.5" cy="-4.38" r="3.88" fill="#f6f6f7" />
+      <circle cx="-3.67" cy="-4.58" r="3.25" fill="#f9f9fa" />
+      <circle cx="-3.83" cy="-4.79" r="2.62" fill="#fcfcfd" />
+      <circle cx="-4.0" cy="-5.0" r="2.0" fill="#ffffff" />
+    </g>
+  </defs>
+  <rect x="540" width="256" height="256" rx="48" fill="#f5f6f7" />
+  <path fill="#616062" d="M744 44C720 24 690 17 660 20C603 23 560 71 560 132C560 195 603 245 660 245C695 245 721 234 744 211L713 181C699 196 682 202 663 202C636 202 616 173 616 133C616 94 637 64 664 64C683 63 700 68 713 79Z" />
+  <g>
+    <use href="#steel-ball" transform="translate(653 44)" />
+    <use href="#steel-ball" transform="translate(697 44)" />
+    <use href="#steel-ball" transform="translate(612 67)" />
+    <use href="#steel-ball" transform="translate(586 106)" />
+    <use href="#steel-ball" transform="translate(586 153)" />
+    <use href="#steel-ball" transform="translate(606 193)" />
+    <use href="#steel-ball" transform="translate(646 220)" />
+    <use href="#steel-ball" transform="translate(696 220)" />
+  </g>
+</svg>

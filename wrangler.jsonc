@@ -1,0 +1,16 @@
+{
+  "name": "sueca-skf",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-11-26",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "sueca.com.br/skf*", "zone_name": "sueca.com.br" }],
+  "build": { "command": "node scripts/build-worker.mjs" },
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  }
+}

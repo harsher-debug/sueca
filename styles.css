@@ -3028,34 +3028,46 @@ summary:focus-visible {
 .authenticate {
   width: 100%;
   margin: 28px 0;
-  padding: 48px max(24px, calc((100% - 1280px) / 2));
-  min-height: 760px;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: 32px 24px;
+  min-height: 0;
+  display: block;
   background: #eef1f3;
 }
-.authenticate-copy { width: 100%; max-width: 540px; padding: 0 24px 0 0; }
-.authenticate h2 { font-size: clamp(30px, 2.7vw, 40px); }
-.authenticate-copy > p:where(:not(.eyebrow)) { font-size: 16px; line-height: 1.75; }
+.authenticate-scene {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+  width: min(100%, 1280px);
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: clamp(20px, 2.2vw, 32px);
+  background: #eef1f3;
+}
+.authenticate-copy { width: 100%; max-width: none; padding: 40px 32px; }
+.authenticate h2 { font-size: clamp(30px, 2.7vw, 40px); margin-bottom: 22px; }
+.authenticate-copy > p:where(:not(.eyebrow)) { font-size: 16px; line-height: 1.65; }
 .authenticate-copy > .authenticate-app-intro { margin-block: 18px; }
 .authenticate-visual {
   position: absolute;
-  /* Clear grid placement so the section, not a grid track, bounds the image. */
+  /* The image fills the same scene whose height is set by the complete copy. */
   grid-column: auto;
   grid-row: auto;
-  inset: 50% max(24px, calc((100% - 1280px) / 2)) auto auto;
-  translate: 0 -50%;
-  width: min(73%, 1020px);
-  aspect-ratio: 3 / 2;
+  inset: 0;
+  translate: none;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
   display: block;
   z-index: 0;
-  border-radius: clamp(18px, 2.2vw, 32px);
+  border-radius: inherit;
   overflow: hidden;
 }
 .authenticate-visual picture { width: 100%; height: 100%; }
 .authenticate-visual img {
-  width: 100%; height: 100%; object-fit: contain; object-position: center;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%);
-  mask-image: linear-gradient(90deg, transparent, #000 35%);
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  -webkit-mask-image: linear-gradient(90deg, transparent 22%, rgba(0,0,0,.08) 35%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 22%, rgba(0,0,0,.08) 35%, #000 55%);
 }
 .authenticate-benefits { margin-top: 22px; }
 .authenticate-actions { margin-top: 24px; }
@@ -3068,9 +3080,10 @@ summary:focus-visible {
   .institutional-presence img { width: 100%; height: auto; }
 }
 @media (max-width: 1100px) {
-  .authenticate { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 36px 24px; gap: 28px; }
-  .authenticate-copy { max-width: 720px; margin-inline: auto; padding: 0; }
-  .authenticate-visual { position: relative; inset: auto; translate: none; grid-column: 1; grid-row: 2; width: min(100%, 900px); margin: 0 auto; }
+  .authenticate { padding: 28px 24px; }
+  .authenticate-scene { grid-template-columns: minmax(0, 1fr); max-width: 900px; }
+  .authenticate-copy { max-width: 760px; margin-inline: auto; padding: 32px; }
+  .authenticate-visual { position: relative; inset: auto; grid-column: 1; grid-row: 2; width: 100%; height: auto; aspect-ratio: 3 / 2; margin: 0; border-radius: 0; }
   .authenticate-visual img { aspect-ratio: auto; -webkit-mask-image: linear-gradient(180deg, transparent, #000 10%); mask-image: linear-gradient(180deg, transparent, #000 10%); }
 }
 @media (max-width: 640px) {
@@ -3078,7 +3091,8 @@ summary:focus-visible {
   .hero-benefits li { padding-right: 0; }
   .institutional-presence { padding: 22px; }
   .applications::before { height: 120px; top: -30px; }
-  .authenticate { padding: 28px 18px; gap: 20px; }
+  .authenticate { padding: 20px 14px; }
+  .authenticate-copy { padding: 24px 18px; }
   .authenticate h2 { font-size: clamp(28px, 7vw, 34px); }
   .authenticate-benefits div { font-size: 13px; line-height: 1.5; }
   .authenticate-visual { aspect-ratio: 1; }

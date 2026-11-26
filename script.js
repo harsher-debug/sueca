@@ -112,8 +112,7 @@ function initScrollEffects() {
     [
       [".hero-flow", ".hero", distance, -distance, "top top"],
       [".contact-flow", ".final-cta", distance, -distance, "top bottom"],
-      [".cutaway", ".skf-force", 30, -18, "top 85%"],
-      [".authenticate-visual picture", ".authenticate", 18, -18, "top bottom"]
+      [".cutaway", ".skf-force", 30, -18, "top 85%"]
     ].forEach(([target, trigger, from, to, start]) => {
       gsap.fromTo(target, { y: from }, {
         y: to,

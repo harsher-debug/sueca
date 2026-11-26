@@ -77,7 +77,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--ink);
-  background: linear-gradient(rgba(235, 242, 244, 0.93), rgba(235, 242, 244, 0.93)), url("assets/optimized/skf-machining-hero.webp") center top / cover fixed;
+  background: linear-gradient(135deg, #f7f8f9, #e9eef0 48%, #f5f6f7);
 }
 
 button, input, select, textarea { font-family: inherit; }
@@ -535,7 +535,7 @@ h1 {
   transform: rotate(-18deg);
   transform-origin: center;
   pointer-events: none;
-  opacity: 0.82;
+  opacity: 0.48;
 }
 
 .hero-benefits {
@@ -550,7 +550,7 @@ h1 {
 
 .hero-benefits li {
   position: relative;
-  padding: 6px 12px 6px 18px;
+  padding: 6px 0 6px 18px;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.5;
@@ -1187,7 +1187,7 @@ p {
 }
 
 .applications {
-  border-top: 3px solid var(--sueca-red);
+  border-top: 0;
 }
 
 .portfolio-inquiry {
@@ -2991,4 +2991,82 @@ summary:focus-visible {
   .authenticate-benefits div { font-size: 13px; padding-inline: 0; }
   .institutional-presence { padding: 16px; grid-template-columns: 80px 1fr; }
   .institutional-presence img { width: 80px; height: 80px; }
+}
+
+/* Review of November 23: softer waves, a framed map and an integrated app section. */
+.hero-benefits { max-width: 540px; grid-template-columns: repeat(3, max-content); gap: 32px; }
+.hero-benefits li { min-width: 0; }
+.hero-flow { transform: rotate(-22deg); }
+.contact-flow { opacity: 0.32; }
+.institutional-inner { grid-template-columns: minmax(0, 1fr) 350px; gap: 40px; }
+.institutional-copy h2 { font-size: clamp(30px, 3vw, 44px); }
+.institutional-copy h2::after { content: ""; display: block; width: 72px; height: 5px; margin-top: 24px; border-radius: 8px; background: #ee353c; }
+.institutional-presence {
+  padding: 24px;
+  border: 1px solid rgba(209, 226, 235, 0.4);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(54, 70, 78, 0.94), rgba(17, 31, 39, 0.93));
+  box-shadow: 0 20px 40px #0004, inset 0 1px 0 #ffffff20;
+}
+.institutional-presence h3 { border-left: 4px solid #ee353c; padding-left: 14px; font-size: 21px; line-height: 1.35; }
+.institutional-presence img { width: 100%; height: auto; margin: 0 auto 14px; filter: drop-shadow(0 12px 8px #0007); }
+.institutional-presence ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(3, auto); grid-template-columns: 1.2fr 1fr; gap: 8px 12px; font-size: 13px; }
+.institutional-presence li { display: flex; align-items: baseline; gap: 6px; }
+.institutional-presence li::before { content: ""; flex: 0 0 13px; height: 2px; background: #ee353c; transform: translateY(-4px); }
+.institutional-presence a { display: block; width: fit-content; margin: 20px auto 0; font-weight: 600; }
+.institutional-presence a span { color: #ff4b51; }
+.institutional-cta, .service-link, .portfolio-inquiry .button {
+  box-shadow: 0 4px 0 rgba(84, 40, 42, 0.2), 0 10px 22px #0002;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.institutional-cta:hover, .service-link:hover, .portfolio-inquiry .button:hover { transform: translateY(-3px); box-shadow: 0 6px 0 rgba(84, 40, 42, 0.18), 0 14px 26px #0002; }
+.institutional-cta:active, .service-link:active, .portfolio-inquiry .button:active { transform: translateY(2px); box-shadow: 0 1px 0 #0002; }
+.skf-force { padding-bottom: 0; gap: 12px; }
+.applications { position: relative; isolation: isolate; padding-top: 24px; }
+.applications::before { content: ""; position: absolute; z-index: -1; top: -60px; left: -8%; width: 116%; height: 180px; background: url("assets/sueca-wave.svg") center / 100% 100% no-repeat; opacity: 0.25; pointer-events: none; }
+.applications > .section-heading { margin-inline: 0; text-align: left; }
+.authenticate {
+  width: 100%;
+  margin: 28px 0;
+  padding: 56px max(24px, calc((100% - 1180px) / 2));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background: #eef1f3;
+}
+.authenticate-copy { max-width: 540px; padding: 0 24px 0 0; }
+.authenticate h2 { font-size: clamp(30px, 2.7vw, 40px); }
+.authenticate-copy > p:where(:not(.eyebrow)) { font-size: 16px; line-height: 1.75; }
+.authenticate-copy > .authenticate-app-intro { margin-block: 18px; }
+.authenticate-visual { position: absolute; inset: 0 0 0 auto; width: 78%; display: block; z-index: 0; }
+.authenticate-visual picture { width: 100%; height: 100%; }
+.authenticate-visual img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%);
+  mask-image: linear-gradient(90deg, transparent, #000 35%);
+}
+.authenticate-benefits { margin-top: 22px; }
+.authenticate-actions { margin-top: 24px; }
+@media (max-width: 1100px) and (min-width: 981px) {
+  .institutional-inner { grid-template-columns: minmax(0, 1fr) 310px; gap: 28px; }
+  .authenticate-copy { padding-right: 18px; }
+  .authenticate-visual img { object-position: 57% center; }
+}
+@media (max-width: 980px) {
+  .institutional-inner { grid-template-columns: 1fr; }
+  .institutional-presence { display: block; width: min(100%, 380px); max-width: none; margin-inline: auto; }
+  .institutional-presence img { width: 100%; height: auto; }
+  .authenticate { grid-template-columns: 1fr; padding: 36px 24px 0; }
+  .authenticate-copy { max-width: 680px; margin-inline: auto; padding: 0; }
+  .authenticate-visual { position: relative; inset: auto; grid-row: 2; width: calc(100% + 48px); margin: 24px -24px 0; }
+  .authenticate-visual picture { width: 100%; height: auto; }
+  .authenticate-visual img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%); mask-image: linear-gradient(180deg, transparent, #000 12%); }
+}
+@media (max-width: 640px) {
+  .hero-benefits { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .hero-benefits li { padding-right: 0; }
+  .institutional-presence { padding: 22px; }
+  .applications::before { height: 120px; top: -30px; }
+  .authenticate-benefits div { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .institutional-cta:hover, .service-link:hover, .portfolio-inquiry .button:hover { transform: none; }
 }

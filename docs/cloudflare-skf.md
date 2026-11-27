@@ -4,6 +4,8 @@ Preparado para publicação autorizada pelo cliente. O acesso à conta Cloudflar
 
 ## Atualizações após commit
 
+Em 27/11/2026, o cliente confirmou a conexão de `harsher-debug/sueca` ao Worker correto, `sueca-skf`, e o ajuste dos comandos de build e deploy. Este registro inicia uma nova execução por push para verificar a integração. Configuração esperada: branch `main`, diretório `/`, build `node --test tests/*.test.* && node scripts/build-worker.mjs` e deploy `npx --yes wrangler@4.168.0 deploy`. O primeiro teste havia sido conectado ao Worker antigo `sueca`, causando conflito de rota; a rota deve permanecer em `sueca-skf`.
+
 O deploy da alteração de mapa e favicon foi confirmado em 27/11/2026. Push no GitHub não era suficiente: a integração de Builds ainda não estava conectada. O servidor já retorna `Cache-Control: public, max-age=0, must-revalidate`, portanto não foi necessário desativar cache ou purgar o institucional.
 
 Fluxo local após cada commit: `powershell -NoProfile -File scripts/publish.ps1`. Interrompe em caso de teste, push ou deploy com erro, e verifica HTTP 200 em produção. A conta Cloudflare está explícita no Wrangler para evitar seleção interativa.

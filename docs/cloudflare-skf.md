@@ -2,6 +2,14 @@
 
 Preparado para publicação autorizada pelo cliente. O acesso à conta Cloudflare da zona sueca.com.br é necessário para o deploy.
 
+## Atualizações após commit
+
+O deploy da alteração de mapa e favicon foi confirmado em 27/11/2026. Push no GitHub não era suficiente: a integração de Builds ainda não estava conectada. O servidor já retorna `Cache-Control: public, max-age=0, must-revalidate`, portanto não foi necessário desativar cache ou purgar o institucional.
+
+Fluxo local após cada commit: `powershell -NoProfile -File scripts/publish.ps1`. Interrompe em caso de teste, push ou deploy com erro, e verifica HTTP 200 em produção. A conta Cloudflare está explícita no Wrangler para evitar seleção interativa.
+
+Para automatizar pushes feitos fora deste computador, conectar o Worker `sueca-skf` ao repositório `harsher-debug/sueca`, branch `main`, em Settings > Builds > Connect. Diretório `/`, build `node --test tests/*.test.*`, deploy `npx wrangler@4.168.0 deploy`. Essa conexão exige autorização do GitHub no painel ou token com permissão Workers Builds Configuration Edit, ausente no OAuth atual. Enquanto não for confirmada, não considerar o deploy por push habilitado. A publicação envolve execução e propagação; não há garantia de atualização literalmente instantânea.
+
 `node scripts/build-worker.mjs` prepara somente arquivos públicos em `dist/skf`. A configuração `wrangler.jsonc` serve os recursos via ASSETS, sem fallback de SPA. A entrada canônica é https://sueca.com.br/skf; /skf/ e /skf/index.html redirecionam preservando a query string. CSS, fontes, imagens, favicon e fetch do mapa resolvem sob /skf/. As âncoras apontam para /skf#secao.
 
 A rota sueca.com.br/skf* é necessária para atender /skf com UTMs (o matching das Routes inclui a query). O Worker limita o atendimento a /skf e /skf/: caminhos semelhantes, como /skf-outro, seguem para a origem com a requisição intacta. Não configurar rota /* nem Custom Domain para esta landing page. workers.dev e previews estão desativados.

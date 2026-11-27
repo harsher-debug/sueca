@@ -1,5 +1,6 @@
 {
   "name": "sueca-skf",
+  "account_id": "dfea89cb040c29b7ee3d1711f458a97a",
   "main": "worker/index.mjs",
   "compatibility_date": "2026-11-26",
   "workers_dev": false,

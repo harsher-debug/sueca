@@ -48,4 +48,7 @@ Created with the built-in `imagegen` tool and optimized as JPEGs. These are illu
 - `application-agro.jpg`: Prompt: Photorealistic red agricultural harvester wheel hub and bearing assembly in a field at golden hour, maintenance technician inspecting the component, machinery dominant, practical agricultural context, premium commercial photography, no logos, no text, landscape.
 # Revisão de 23 de novembro
 
+- `favicon.ico`: arquivo original do favicon usado em https://sueca.aprovabox.com.br/media/favicon/stores/1/sueca-favicon-e-transparente.ico. Os ícones PNG para navegador e atalho de celular são derivados desse mesmo arquivo.
+- `favicon.svg`: letra E da identidade Sueca, com barra superior vermelha e demais barras adaptadas por `prefers-color-scheme` para abas claras e escuras, conforme solicitação de 27/11/2026. ICO e PNG permanecem como alternativas para navegadores sem favicon SVG.
+
 - `sueca-presence-depth.svg`: derivado do mapa vetorial `sueca-presence.svg` já usado na página. Mantém os contornos dos estados e destaca RS, PR, SP, MT e GO; adiciona volume e siglas conforme a referência enviada pelo cliente. O painel de fundo é implementado em CSS para manter os textos legíveis e o layout responsivo.
